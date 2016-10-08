@@ -1,4 +1,4 @@
-package com.trucksale.app;
+package com.trucksale.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
