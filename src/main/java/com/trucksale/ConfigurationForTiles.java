@@ -1,4 +1,4 @@
-package com.trucksale.app;
+package com.trucksale;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
