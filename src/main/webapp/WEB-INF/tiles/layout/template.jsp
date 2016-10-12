@@ -12,12 +12,12 @@
 		
 		
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/static/css/bootstrap.css" rel="stylesheet" />
-		<link href="${pageContext.request.contextPath}/static/css/ionicons.css" rel="stylesheet" />
-		<link href="${pageContext.request.contextPath}/static/css/font-awesome.css" rel="stylesheet" />
-		<link href="${pageContext.request.contextPath}/static/js/source/jquery.fancybox.css" rel="stylesheet" />
-		<link href="${pageContext.request.contextPath}/static/css/animations.min.css" rel="stylesheet" />
-		<link href="${pageContext.request.contextPath}/static/css/style-white.css" rel="stylesheet" />
+		<link href="/static/css/bootstrap.css" rel="stylesheet" />
+		<link href="/static/css/ionicons.css" rel="stylesheet" />
+		<link href="/static/css/font-awesome.css" rel="stylesheet" />
+		<link href="/static/js/source/jquery.fancybox.css" rel="stylesheet" />
+		<link href="/static/css/animations.min.css" rel="stylesheet" />
+		<link href="/static/css/style-white.css" rel="stylesheet" />
 	</head>
 	<body>
 		<div class="background-second-page"></div>
@@ -29,11 +29,11 @@
 		<!-- Footer -->
 		<tiles:insertAttribute name="footer" />
 		
- 		<script src="${pageContext.request.contextPath}/static/js/jquery-1.11.1.js"></script>
-		<script src="${pageContext.request.contextPath}/static/js/bootstrap.js"></script>
-		<script src="${pageContext.request.contextPath}/static/js/vegas/jquery.vegas.min.js"></script>
-		<script src="${pageContext.request.contextPath}/static/js/appear.min.js"></script>
-		<script src="${pageContext.request.contextPath}/static/js/animations.min.js"></script>
+ 		<script src="/static/js/jquery-1.11.1.js"></script>
+		<script src="/static/js/bootstrap.js"></script>
+		<script src="/static/js/vegas/jquery.vegas.min.js"></script>
+		<script src="/static/js/appear.min.js"></script>
+		<script src="/static/js/animations.min.js"></script>
 		<tiles:insertAttribute name="script"/>
 	</body>
 </html>
