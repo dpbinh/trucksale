@@ -10,7 +10,6 @@
 		<meta name="description" content="" />
 		<meta name="author" content="" />
 		
-		
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 		<link href="/static/css/bootstrap.css" rel="stylesheet" />
 		<link href="/static/css/ionicons.css" rel="stylesheet" />

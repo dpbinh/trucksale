@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.trucksale.model.User;
+import com.trucksale.model.Users;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<Users, Long> {
 	
-	List<User> findByName(String name);
+	List<Users> findByUsername(String username);
 	
 }
