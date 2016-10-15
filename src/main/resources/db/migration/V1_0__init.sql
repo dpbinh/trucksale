@@ -1,77 +1,79 @@
-create table if not exists Role 
+create table if not exists ROLE 
 (
-	id bigint primary key auto_increment,
-    rolename varchar(20)
+	ID bigint primary key auto_increment,
+    NAME varchar(20)
 );
 
-create table if not exists Users 
+create table if not exists USERS 
 (
-	id bigint primary key auto_increment,
-    username varchar(256),
-    password varchar(256),
-    roleId bigint
+	ID bigint primary key auto_increment,
+    USER_NAME varchar(256),
+    PASSWORD varchar(256),
+    ROLE_ID bigint
 );
 
-create table if not exists ProductGroup
+create table if not exists PRODUCT_GROUP
 (
-	id bigint primary key auto_increment,
-    groupname text
+	ID bigint primary key auto_increment,
+    NAME varchar(256),
+    IMG varchar(256)
 );
 
-create table if not exists Product
+create table if not exists PRODUCT
 (
-	id bigint primary key auto_increment,
-    productname text,
-    img varchar(256),
-    price bigint,
-    groupproductId bigint
+	ID bigint primary key auto_increment,
+    NAME varchar(256),
+    IMG varchar(256),
+    PRICE bigint,
+    PRODUCT_GROUP_ID bigint
 );
 
-create table if not exists SpecificationProduct
+create table if not exists SPECIFICATION_PRODUCT
 (
-	id bigint primary key auto_increment,
-    specId bigint,
-    productId bigint,
-    specvalue text
+	ID bigint primary key auto_increment,
+    SPECIFICATION_ID bigint,
+    PRODUCT_ID bigint,
+    SPECIFICATION_VALUE varchar(256)
 );
 
-create table if not exists ProductImg
+create table if not exists PRODUCT_IMG
 (
-	id bigint primary key auto_increment,
-    productId bigint,
-    img varchar(256),
-    imggroup varchar(20)
+	ID bigint primary key auto_increment,
+    PRODUCT_ID bigint,
+    IMG varchar(256),
+    IMG_GROUP varchar(20)
 );
 
-create table if not exists Specification 
+create table if not exists SPECIFICATION 
 (
-	id bigint primary key auto_increment,
-    specname text,
-    specnameen text,
-    specgroupId bigint
+	ID bigint primary key auto_increment,
+    NAME varchar(256),
+    NAME_EN varchar(256),
+    SPECIFICATION_GROUP_ID bigint
 );
 
-create table if not exists SpecificationGroup
+create table if not exists SPECIFICATION_GROUP
 (
-	id bigint primary key auto_increment,
-    specgroupname text
+	ID bigint primary key auto_increment,
+    NAME varchar(256)
 );
 
-alter table Users
-add constraint users_role foreign key(roleId) references Role(id);
+alter table USERS
+add constraint users_role foreign key(ROLE_ID) references ROLE(ID);
 
-alter table Product
-add constraint product_groupproduct foreign key ( groupproductId) references ProductGroup(id);
+alter table PRODUCT
+add constraint product_groupproduct foreign key ( PRODUCT_GROUP_ID) references PRODUCT_GROUP(ID);
 
-alter table SpecificationProduct 
-add constraint specproduct_product foreign key (productid) references product(id);
+alter table SPECIFICATION_PRODUCT
+add constraint specproduct_product foreign key (PRODUCT_ID) references PRODUCT(ID);
 
-alter table SpecificationProduct
-add constraint specproduct_spec foreign key (specid) references specification(id);
+alter table SPECIFICATION_PRODUCT
+add constraint specproduct_spec foreign key (SPECIFICATION_ID) references SPECIFICATION(ID);
 
-alter table productimg 
-add constraint productimg_product foreign key (productid) references product(id);
+alter table PRODUCT_IMG 
+add constraint productimg_product foreign key (PRODUCT_ID) references PRODUCT(ID);
 
-alter table specification
-add constraint specification foreign key (specgroupid) references specificationgroup(id);
+alter table SPECIFICATION
+add constraint specification foreign key (SPECIFICATION_GROUP_ID) references SPECIFICATION_GROUP(ID);
 
+insert into ROLE(NAME) values ('ADMIN');

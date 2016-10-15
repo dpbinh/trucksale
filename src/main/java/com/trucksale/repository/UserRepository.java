@@ -8,6 +8,6 @@ import com.trucksale.model.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 	
-	List<User> findByUsername(String username);
+	List<User> findByUserName(String username);
 	
 }

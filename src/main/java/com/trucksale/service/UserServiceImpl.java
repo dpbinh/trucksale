@@ -10,11 +10,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.trucksale.model.User;
+import com.trucksale.repository.UserRepository;
 
 @Service("userService")
-public class UserServiceImpl implements UserDetailsService, UserService{
+public class UserServiceImpl implements UserService{
 	
 	private Log log = LogFactory.getLog(this.getClass());
+	
+	@Autowired
+	private UserRepository userRepo;
 	
 	@Autowired
     private PasswordEncoder passwordEncoder;
@@ -25,14 +29,9 @@ public class UserServiceImpl implements UserDetailsService, UserService{
 		String encoded = passwordEncoder.encode(user.getPassword());
 		 
 		log.info("Pass encoded: " + encoded);
-		
+//		userRepo.save(user);
 		log.info("Check Pass :" + passwordEncoder.matches(real, encoded));
 	}
 
-	@Override
-	public UserDetails loadUserByUsername(String arg0) throws UsernameNotFoundException {
-		 
-		return null;
-	}
-	 
+ 
 }
