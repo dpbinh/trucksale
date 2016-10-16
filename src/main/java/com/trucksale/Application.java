@@ -9,8 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import com.trucksale.model.User;
+ 
 import com.trucksale.service.UserService;
 
 @SpringBootApplication
@@ -30,7 +29,7 @@ public class Application {
 	@Bean
 	public CommandLineRunner demo(UserService userrepo) {
 		return (args) -> {
-			userrepo.save(new User("tuabin@gmail.com", "ddasdas"));
+			 
 			log.info("save succesful");
 		};
 	}

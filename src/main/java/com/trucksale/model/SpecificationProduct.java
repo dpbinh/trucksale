@@ -22,7 +22,7 @@ public class SpecificationProduct {
 	public SpecificationProduct() {
 		super();
 	}
-
+	
 	public SpecificationProduct(  long productId, String specValue) {
 		super();
  

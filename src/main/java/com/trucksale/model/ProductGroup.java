@@ -16,6 +16,12 @@ public class ProductGroup {
 	
 	@NotNull
 	private String name;
+	
+	private String img;
+	
+	public ProductGroup() {
+		super();
+	}
 
 	public ProductGroup(String groupName) {
 		super();
@@ -38,4 +44,11 @@ public class ProductGroup {
 		this.name = name;
 	}
 
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
 }

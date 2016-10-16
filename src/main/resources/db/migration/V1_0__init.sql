@@ -49,13 +49,17 @@ create table if not exists SPECIFICATION
 	ID bigint primary key auto_increment,
     NAME varchar(256),
     NAME_EN varchar(256),
+    ACTIVE  tinyint(1),
+    QUICK_SHOW tinyint(1),
+    PRIORITY integer,
     SPECIFICATION_GROUP_ID bigint
 );
 
 create table if not exists SPECIFICATION_GROUP
 (
 	ID bigint primary key auto_increment,
-    NAME varchar(256)
+    NAME varchar(256),
+    PRIORITY integer
 );
 
 alter table USERS
@@ -77,3 +81,5 @@ alter table SPECIFICATION
 add constraint specification foreign key (SPECIFICATION_GROUP_ID) references SPECIFICATION_GROUP(ID);
 
 insert into ROLE(NAME) values ('ADMIN');
+
+insert into PRODUCT_GROUP(NAME, IMG) values ("Suzuki", "abcd");

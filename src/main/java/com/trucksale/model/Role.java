@@ -16,6 +16,10 @@ public class Role {
 	
 	@Enumerated(EnumType.STRING)
 	private RoleType name;
+	
+	public Role() {
+		super();
+	}
 
 	public Role(RoleType role) {
 		super();

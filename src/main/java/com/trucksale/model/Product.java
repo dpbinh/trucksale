@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -21,11 +20,14 @@ public class Product {
 	
 	@ManyToOne
 	private ProductGroup productGroup;
+	
+	public Product() {
+		super();
+	}
 
 	public Product(String productName, String img, long price) {
 		super();
 		this.name = productName;
-		
 		this.img = img;
 		this.price = price;
 	}

@@ -15,7 +15,8 @@ create table if not exists USERS
 create table if not exists PRODUCT_GROUP
 (
 	ID bigint primary key auto_increment,
-    NAME varchar(256)
+    NAME varchar(256),
+    IMG varchar(256)
 );
 
 create table if not exists PRODUCT
@@ -30,9 +31,9 @@ create table if not exists PRODUCT
 create table if not exists SPECIFICATION_PRODUCT
 (
 	ID bigint primary key auto_increment,
-    SPEC_ID bigint,
+    SPECIFICATION_ID bigint,
     PRODUCT_ID bigint,
-    SPEC_VALUE varchar(256)
+    SPECIFICATION_VALUE varchar(256)
 );
 
 create table if not exists PRODUCT_IMG
@@ -48,13 +49,17 @@ create table if not exists SPECIFICATION
 	ID bigint primary key auto_increment,
     NAME varchar(256),
     NAME_EN varchar(256),
-    SPEC_GROUP_ID bigint
+    ACTIVE  tinyint(1),
+    QUICK_SHOW tinyint(1),
+    PRIORITY integer,
+    SPECIFICATION_GROUP_ID bigint
 );
 
 create table if not exists SPECIFICATION_GROUP
 (
 	ID bigint primary key auto_increment,
-    NAME varchar(256)
+    NAME varchar(256),
+    PRIORITY integer
 );
 
 alter table USERS
@@ -67,11 +72,13 @@ alter table SPECIFICATION_PRODUCT
 add constraint specproduct_product foreign key (PRODUCT_ID) references PRODUCT(ID);
 
 alter table SPECIFICATION_PRODUCT
-add constraint specproduct_spec foreign key (SPEC_ID) references SPECIFICATION(ID);
+add constraint specproduct_spec foreign key (SPECIFICATION_ID) references SPECIFICATION(ID);
 
 alter table PRODUCT_IMG 
 add constraint productimg_product foreign key (PRODUCT_ID) references PRODUCT(ID);
 
 alter table SPECIFICATION
-add constraint specification foreign key (SPEC_GROUP_ID) references SPECIFICATION_GROUP(ID);
+add constraint specification foreign key (SPECIFICATION_GROUP_ID) references SPECIFICATION_GROUP(ID);
+
+insert into ROLE(NAME) values ('ADMIN');
 

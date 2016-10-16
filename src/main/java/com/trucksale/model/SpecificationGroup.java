@@ -14,16 +14,18 @@ public class SpecificationGroup {
 	
 	private String name;
  
-	
+	private int priority;
 	
 	public SpecificationGroup() {
 		super();
 	}
-
-	public SpecificationGroup(String groupName) {
+	
+	public SpecificationGroup(String name, int priority) {
 		super();
-		this.name = groupName;
+		this.name = name;
+		this.priority = priority;
 	}
+
 
 	public long getId() {
 		return id;
@@ -39,5 +41,15 @@ public class SpecificationGroup {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+
+	public int getPriority() {
+		return priority;
+	}
+
+
+	public void setPriority(int priority) {
+		this.priority = priority;
 	}
 }

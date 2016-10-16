@@ -1,7 +1,11 @@
 package com.trucksale.service;
 
-import com.trucksale.model.User;
+import com.trucksale.bean.ActionResult;
+import com.trucksale.bean.ActionResultT;
+import com.trucksale.bean.UserBean;
 
 public interface UserService {
-	void save(User user);
+	ActionResultT<UserBean> addNewUser(UserBean user);
+	
+	ActionResult changePassword(UserBean user);
 }
