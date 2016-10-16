@@ -1,8 +1,5 @@
 package com.trucksale.bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.trucksale.model.ProductGroup;
 
 public class ProductGroupBean {
@@ -16,14 +13,6 @@ public class ProductGroupBean {
 		this.id = productGroup.getId();
 		this.name = productGroup.getName();
 		this.img = productGroup.getImg();
-	}
-	
-	public static List<ProductGroupBean> convertFrom(Iterable<ProductGroup> groups){
-		List<ProductGroupBean> groupbeans = new ArrayList<ProductGroupBean>();
-		for(ProductGroup pg : groups){
-			groupbeans.add(new ProductGroupBean(pg));
-		}
-		return groupbeans;
 	}
 
 	public long getId() {
