@@ -3,7 +3,7 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-
+	
 	<definition name="template" template="/WEB-INF/tiles/layout/template.jsp">
 		<put-attribute name="title" value="" />
 		<put-attribute name="header" value="/WEB-INF/tiles/layout/pages/header.jsp" />
@@ -33,5 +33,28 @@
 	<definition name="pricing" extends="template">
 		<put-attribute name="title" value="Bảng Giá" />
 		<put-attribute name="body" value="/WEB-INF/tiles/view/pricing/pricing.jsp" />
+	</definition>
+	
+	<!--  admin -->
+	
+	<definition name="admin_template" template="/WEB-INF/tiles/admin/layout/template.jsp">
+		<put-attribute name="admin_title" value=""/>
+		<put-attribute name="admin_header" value="/WEB-INF/tiles/admin/layout/pages/header.jsp"/> 
+		<put-attribute name="admin_body" value=""/>
+	</definition>
+	
+	<definition name="admin_home" extends="admin_template">
+		<put-attribute name="admin_title" value="Trang Chủ Quản Trị" />
+		<put-attribute name="admin_body" value="/WEB-INF/tiles/admin/view/home/home.jsp" />
+	</definition>
+	
+	<definition name="admin_products" extends="admin_template">
+		<put-attribute name="admin_title" value="Quản lý sản phẩm" />
+		<put-attribute name="admin_body" value="/WEB-INF/tiles/admin/view/product/products.jsp" />
+	</definition>
+	
+	<definition name="admin_newproduct" extends="admin_template">
+		<put-attribute name="admin_title" value="Thêm sản phẩm" />
+		<put-attribute name="admin_body" value="/WEB-INF/tiles/admin/view/product/newproduct.jsp" />
 	</definition>
 </tiles-definitions>

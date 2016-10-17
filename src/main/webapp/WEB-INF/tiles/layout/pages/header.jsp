@@ -12,21 +12,21 @@
 	            <img src="/static/img/logo/logo.png" class="img-responsive logo" />
 	        </a>
 	    </div>
-	    <div class="navbar-collapse collapse">
+	    <div class="navbar-collapse collapse" >
 	        <ul class="nav navbar-nav navbar-right">
 	            <li  class='<c:if test="${page == 'home'}"> active </c:if>' ><a href="/">TRANG CHỦ</a></li>
 	            <li   class="dropdown-large  <c:if test="${page == 'product'}"> active </c:if>">
 	                <a href="" class="dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
 	                    SẢN PHẨM
 	                </a>
-					<ul class="dropdown-menu dropdown-menu-large row">
-						<li class="col-sm-3 img">
+					<ul class="dropdown-menu dropdown-menu-large row" >
+						<li class="col-sm-3 img" >
 							<a href="/product/1">
 								<img class="img-responsive" src="/static/img/logo/suzuki.png" />
 								<h5 class="mtitle">Suzuki</h5>
 							</a>
 						</li>
-						<li class="img col-sm-3">
+						<!-- <li class="img col-sm-3">
 							<a href="products.html">
 							<img class="img-responsive" src="/static/img/logo/huyndai.png" />
 							<h5 class="mtitle">Hyundai</h5>
@@ -61,7 +61,7 @@
 								<img class="img-responsive" src="/static/img/logo/hino.png" />
 								<h5 class="mtitle">Hino</h5>
 							</a>
-						</li>
+						</li> -->
 					</ul>
 				</li>
 	            <li class='<c:if test="${page == 'pricing'}"> active </c:if>'><a href="/pricing">BẢNG GIÁ</a></li>
@@ -74,3 +74,7 @@
 	
 	</div>
 </div>
+<script>
+	
+
+</script>
