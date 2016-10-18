@@ -22,6 +22,8 @@
 		<script src="/static/js/vegas/jquery.vegas.min.js"></script>
 		<script src="/static/js/appear.min.js"></script>
 		<script src="/static/js/animations.min.js"></script>
+		<script src="/static/js/custom.js"></script>
+		<script src="/static/js/jquery.validate.min.js"></script>
 	</head>
 	<body>
 		<!-- Header -->
@@ -31,5 +33,6 @@
 		<!-- Footer -->
 		<tiles:insertAttribute name="footer" />
 
+		
 	</body>
 </html>

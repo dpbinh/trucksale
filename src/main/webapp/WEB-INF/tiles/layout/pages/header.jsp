@@ -19,49 +19,8 @@
 	                <a href="" class="dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
 	                    SẢN PHẨM
 	                </a>
-					<ul class="dropdown-menu dropdown-menu-large row" >
-						<li class="col-sm-3 img" >
-							<a href="/product/1">
-								<img class="img-responsive" src="/static/img/logo/suzuki.png" />
-								<h5 class="mtitle">Suzuki</h5>
-							</a>
-						</li>
-						<!-- <li class="img col-sm-3">
-							<a href="products.html">
-							<img class="img-responsive" src="/static/img/logo/huyndai.png" />
-							<h5 class="mtitle">Hyundai</h5>
-							</a>
-						</li>
-						<li class="col-sm-3 img">
-							<a href="#">
-								<img class="img-responsive" src="/static/img/logo/misubishi.png" />
-								<h5 class="mtitle">Mitsubishi</h5>
-							</a>
-						</li>
-						<li class="col-sm-3 img">
-							<a href="#">
-								<img class="img-responsive" src="/static/img/logo/isuzu.png" />
-								<h5 class="mtitle">Isuzu</h5>
-							</a>
-						</li>
-						<li class="col-sm-3 img">
-							<a href="#">
-								<img class="img-responsive" src="/static/img/logo/veam.png" />
-								<h5 class="mtitle">Veam</h5>
-							</a>
-						</li>
-						<li class="col-sm-3 img">
-							<a href="#">
-								<img class="img-responsive" src="/static/img/logo/dongfeng.png" />
-								<h5 class="mtitle">Dongfeng</h5>
-							</a>
-						</li>
-						<li class="col-sm-3 img">
-							<a href="#">
-								<img class="img-responsive" src="/static/img/logo/hino.png" />
-								<h5 class="mtitle">Hino</h5>
-							</a>
-						</li> -->
+					<ul class="dropdown-menu dropdown-menu-large row" id="header-product-menu" >
+					 	
 					</ul>
 				</li>
 	            <li class='<c:if test="${page == 'pricing'}"> active </c:if>'><a href="/pricing">BẢNG GIÁ</a></li>
@@ -75,6 +34,14 @@
 	</div>
 </div>
 <script>
-	
-
+	 var grouptmpstr = "<li class='col-sm-3 img' ><a href='/product/{0}'><img class='img-responsive' src='{1}' /><h5 class='mtitle'>{2}</h5></a></li>"
+	 var grouptmp = $.validator.format(grouptmpstr);
+	 $(function(){
+		$.get('/api/productgroups', function(data){
+			$('#header-product-menu').html("");
+			$.each(data.objects, function(key,val){
+				$('#header-product-menu').append(grouptmp(val.id, val.img, val.name));
+			});
+		});
+	 });
 </script>
