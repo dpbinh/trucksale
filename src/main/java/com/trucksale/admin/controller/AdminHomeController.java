@@ -13,4 +13,9 @@ public class AdminHomeController {
 	public ModelAndView home(){
 		return new ModelAndView("admin_home");
 	}
+	
+	@RequestMapping(value="/product/new", method= RequestMethod.GET)
+	public ModelAndView newProduct(){
+		return new ModelAndView("admin_newproduct");
+	}
 }

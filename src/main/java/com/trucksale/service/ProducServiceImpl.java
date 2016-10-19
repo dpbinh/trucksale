@@ -135,7 +135,9 @@ public class ProducServiceImpl implements ProductService {
 			for(SpecificationGroup g : groups){
 				SpecificationGroupBean p = new SpecificationGroupBean(g);
 				Iterable<Specification> specs = specificationRepo.findBySpecificationGroupId(g.getId());
+				log.info("getAllActiveSpecification: " + g.getId() );
 				p.setSpecifications(BeanUtil.convertToList(specs, SpecificationBean.class));
+				specgs.add(p);
 			}
 			result.setObjects(specgs);
 			

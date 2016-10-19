@@ -14,7 +14,9 @@
 <link href="/static/css/bootstrap.css" rel="stylesheet" />
 <link href="/static/css/sb-admin.css" rel="stylesheet">
 <link href="/static/css/font-awesome.css" rel="stylesheet" />
-
+<script src="/static/js/jquery-1.11.1.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+<script src="/static/js/jquery.validate.min.js"></script>
 </head>
 
 <body>
@@ -28,9 +30,7 @@
 		</div>
 	</div>
 
-	<script src="/static/js/jquery-1.11.1.js"></script>
-	<script src="/static/js/bootstrap.js"></script>
-
+	
 </body>
 
 </html>
