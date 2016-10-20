@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.trucksale.model.Product;
+import com.trucksale.model.ProductGroup;
 import com.trucksale.model.SpecificationProduct;
 
 public class ProductBean {
@@ -15,6 +16,8 @@ public class ProductBean {
 	private String img;
 	
 	private long price;
+	
+	private ProductGroup group;
 	
 	private List<SpecificationGroupBean> specGroups = new ArrayList<SpecificationGroupBean>();
 	
@@ -100,4 +103,14 @@ public class ProductBean {
 	public void setSpecGroups(List<SpecificationGroupBean> specGroups) {
 		this.specGroups = specGroups;
 	}
+
+	public ProductGroup getGroup() {
+		return group;
+	}
+
+	public void setGroup(ProductGroup group) {
+		this.group = group;
+	}
+	
+	
 }

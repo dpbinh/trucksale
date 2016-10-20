@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.trucksale.Application;
+import com.trucksale.bean.ActionResult;
 import com.trucksale.bean.ActionResultSingle;
 import com.trucksale.bean.ActionResultT;
+import com.trucksale.bean.AddNewProductBean;
 import com.trucksale.bean.BeanUtil;
 import com.trucksale.bean.PricingBean;
 import com.trucksale.bean.ProductBean;
@@ -163,5 +165,47 @@ public class ProducServiceImpl implements ProductService {
 		
 		return result;
 	}
+
+	@Override
+	public ActionResultT<ProductGroupBean> getAllProducts() {
+		ActionResultT<ProductGroupBean> result = new ActionResultT<ProductGroupBean>();
+		try{
+			Iterable<ProductGroup> groups =  productGroupRepo.findAll();
+			List<ProductGroupBean> groupsb = BeanUtil.convertToList(groups, ProductGroupBean.class);
+			for(ProductGroupBean g : groupsb){
+				Iterable<Product> products = productRepo.findByProductGroupId(g.getId());
+				g.setProducts(BeanUtil.convertToList(products, ProductBean.class));
+			}
+			result.setObjects(groupsb);
+		} catch(Exception e){
+			result.setSuccess(false);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public ActionResult addNewProduct(AddNewProductBean product) {
+		ActionResult result = new ActionResult();
+		log.info(product.getName() + " " + product.getPrice() + " " + product.getGroupid());
+		try{
+			Product newproduct = new Product();
+			newproduct.setName(product.getName());
+			newproduct.setPrice(product.getPrice());
+			ProductGroup group = productGroupRepo.findOne(product.getGroupid());
+			newproduct.setProductGroup(group);
+			Product saved = productRepo.save(newproduct);
+			
+			log.info(String.valueOf(saved.getId()));
+		} catch(Exception e){
+			result.setSuccess(false);
+			result.setMessage(e.getMessage());
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
 
 }
