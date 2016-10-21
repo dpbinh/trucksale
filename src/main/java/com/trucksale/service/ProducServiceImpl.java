@@ -1,36 +1,32 @@
 package com.trucksale.service;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omg.CORBA.Any;
+import org.omg.CORBA.Object;
+import org.omg.CORBA.TypeCode;
+import org.omg.CORBA.portable.InputStream;
+import org.omg.CORBA_2_3.portable.OutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.trucksale.Application;
 import com.trucksale.bean.ActionResult;
-import com.trucksale.bean.ActionResultSingle;
-import com.trucksale.bean.ActionResultT;
 import com.trucksale.bean.AddNewProductBean;
 import com.trucksale.bean.BeanUtil;
 import com.trucksale.bean.PricingBean;
 import com.trucksale.bean.ProductBean;
 import com.trucksale.bean.ProductGroupBean;
-import com.trucksale.bean.ProductResourceBean;
-import com.trucksale.bean.SpecificationBean;
-import com.trucksale.bean.SpecificationGroupBean;
 import com.trucksale.model.Product;
 import com.trucksale.model.ProductGroup;
-import com.trucksale.model.ProductImg;
-import com.trucksale.model.Specification;
-import com.trucksale.model.SpecificationGroup;
-import com.trucksale.model.SpecificationProduct;
 import com.trucksale.repository.ProductGroupRepository;
-import com.trucksale.repository.ProductImgRepository;
 import com.trucksale.repository.ProductRepository;
-import com.trucksale.repository.SpecificationGroupRepository;
-import com.trucksale.repository.SpecificationProductRepository;
-import com.trucksale.repository.SpecificationRepository;
 
 @Service
 public class ProducServiceImpl implements ProductService {
@@ -40,153 +36,94 @@ public class ProducServiceImpl implements ProductService {
 	private ProductRepository productRepo;
 	
 	private ProductGroupRepository productGroupRepo;
+
 	
-	private SpecificationProductRepository specProductRepo;
-	
-	private ProductImgRepository productImgRepo;
-	
-	private SpecificationGroupRepository specificationGroupRepo;
-	
-	private SpecificationRepository specificationRepo;
-	
-	public ProducServiceImpl(ProductRepository productRepo, ProductGroupRepository productGroupRepo, SpecificationProductRepository specProductRepo, ProductImgRepository productImgRepo,
-			SpecificationGroupRepository specificationGroupRepo,SpecificationRepository specificationRepo) {
+	public ProducServiceImpl(ProductRepository productRepo, ProductGroupRepository productGroupRepo) {
 		super();
 		this.productRepo = productRepo;
 		this.productGroupRepo = productGroupRepo;
-		this.specProductRepo = specProductRepo;
-		this.productImgRepo = productImgRepo;
-		this.specificationGroupRepo = specificationGroupRepo;
-		this.specificationRepo = specificationRepo;
 	}
 
 	@Override
-	public ActionResultT<ProductGroupBean> getAllProductGroup() {
-		ActionResultT<ProductGroupBean> result = new ActionResultT<ProductGroupBean>();
+	public List<ProductGroupBean> getAllProductGroup()  throws Exception{
+		List<ProductGroupBean> result = new ArrayList<ProductGroupBean>();
 		
 		try{
 			Iterable<ProductGroup> groups =  productGroupRepo.findAll();
-			result.setObjects(BeanUtil.convertToList(groups, ProductGroupBean.class));
+			result = BeanUtil.convertToList(groups, ProductGroupBean.class);
 		} catch(Exception e){
-			result.setSuccess(false);
-			result.setMessage(e.getMessage());
+			throw new Exception("Error while get all product: " + e.getMessage());
 		}
 		
 		return result;
 	}
 
 	@Override
-	public ActionResultT<ProductBean> getProductsByGroup(long groupId) {
-		ActionResultT<ProductBean> result = new ActionResultT<ProductBean>();
+	public List<ProductBean> getProductsByGroup(long groupId)  throws Exception{
+		List<ProductBean> result = new ArrayList<ProductBean>();
 		try{
 			Iterable<Product> products = productRepo.findByProductGroupId(groupId);
-			result.setObjects(BeanUtil.convertToList(products, ProductBean.class));
+			result = BeanUtil.convertToList(products, ProductBean.class);
 			
 		} catch(Exception e){
-			result.setSuccess(false);
-			result.setMessage(e.getMessage());
+			 throw new Exception("Get product by manufactor error: " + e.getMessage());
 		}
 		
 		return result;
 	}
 
 	@Override
-	public ActionResultSingle<ProductBean> getProductDetail(long productId) {
-		ActionResultSingle<ProductBean> result = new ActionResultSingle<ProductBean>();
+	public Product getProductDetail(long productId)  throws Exception{
+		Product product = null;
 		try{
-			Product product = productRepo.findOne(productId);
-			Iterable<SpecificationProduct> specs = specProductRepo.findByProductId(productId);
-			
-			ProductBean productBean = new ProductBean(product, specs);
-			result.setObject(productBean);
+			product = productRepo.findOne(productId);
 		} catch(Exception e){
-			result.setSuccess(false);
-			result.setMessage(e.getMessage());
+			 throw new Exception("Can not get product with id = " + productId + ": " + e.getMessage());
 		}
 		
-		return result;
+		return product;
 	}
 
 	@Override
-	public ActionResultT<PricingBean> getPricing() {
-		ActionResultT<PricingBean> result = new ActionResultT<PricingBean>();
+	public List<PricingBean> getPricing()  throws Exception{
+		List<PricingBean> result = new ArrayList<PricingBean>();
 		try{
 			Iterable<ProductGroup> groups =  productGroupRepo.findAll();
-			List<PricingBean> ps = new ArrayList<PricingBean>();
+
 			for(ProductGroup g : groups){
 				PricingBean p = new PricingBean(g.getName());
 				Iterable<Product> products = productRepo.findByProductGroupId(g.getId());
 				p.setProducts(BeanUtil.convertToList(products, ProductBean.class));
+				result.add(p);
 			}
-			result.setObjects(ps);
-			
+
 		} catch(Exception e){
-			result.setSuccess(false);
-			result.setMessage(e.getMessage());
+			throw new Exception("Error can not get pricing: " + e.getMessage());
 		}
 		
 		return result;
 	}
 
 	@Override
-	public ActionResultT<SpecificationGroupBean> getAllActiveSpecification() {
-		ActionResultT<SpecificationGroupBean> result = new ActionResultT<SpecificationGroupBean>();
-		try{
-			Iterable<SpecificationGroup> groups =  specificationGroupRepo.findAll();
-			List<SpecificationGroupBean> specgs = new ArrayList<SpecificationGroupBean>();
-			for(SpecificationGroup g : groups){
-				SpecificationGroupBean p = new SpecificationGroupBean(g);
-				Iterable<Specification> specs = specificationRepo.findBySpecificationGroupId(g.getId());
-				log.info("getAllActiveSpecification: " + g.getId() );
-				p.setSpecifications(BeanUtil.convertToList(specs, SpecificationBean.class));
-				specgs.add(p);
-			}
-			result.setObjects(specgs);
-			
-		} catch(Exception e){
-			result.setSuccess(false);
-			result.setMessage(e.getMessage());
-		}
-		
-		return result;
-	}
-
-	@Override
-	public ActionResultT<ProductResourceBean> getProductResource(long productId) {
-		ActionResultT<ProductResourceBean> result = new ActionResultT<ProductResourceBean>();
-		try{
-			Iterable<ProductImg> productImgs = productImgRepo.findByProductId(productId);
-			result.setObjects(BeanUtil.convertToList(productImgs, ProductResourceBean.class));
-			
-		} catch(Exception e){
-			result.setSuccess(false);
-			result.setMessage(e.getMessage());
-		}
-		
-		return result;
-	}
-
-	@Override
-	public ActionResultT<ProductGroupBean> getAllProducts() {
-		ActionResultT<ProductGroupBean> result = new ActionResultT<ProductGroupBean>();
+	public List<ProductGroupBean> getAllProducts()  throws Exception{
+		List<ProductGroupBean> result = new ArrayList<ProductGroupBean>();
 		try{
 			Iterable<ProductGroup> groups =  productGroupRepo.findAll();
-			List<ProductGroupBean> groupsb = BeanUtil.convertToList(groups, ProductGroupBean.class);
-			for(ProductGroupBean g : groupsb){
+			result = BeanUtil.convertToList(groups, ProductGroupBean.class);
+			for(ProductGroupBean g : result){
 				Iterable<Product> products = productRepo.findByProductGroupId(g.getId());
 				g.setProducts(BeanUtil.convertToList(products, ProductBean.class));
 			}
-			result.setObjects(groupsb);
+ 
 		} catch(Exception e){
-			result.setSuccess(false);
-			result.setMessage(e.getMessage());
+			 throw new Exception("error get products: " + e.getMessage());
 		}
 		
 		return result;
 	}
 
 	@Override
-	public ActionResult addNewProduct(AddNewProductBean product) {
+	public void addNewProduct(AddNewProductBean product)  throws Exception{
 		ActionResult result = new ActionResult();
 		log.info(product.getName() + " " + product.getPrice() + " " + product.getGroupid());
 		try{
@@ -195,15 +132,21 @@ public class ProducServiceImpl implements ProductService {
 			newproduct.setPrice(product.getPrice());
 			ProductGroup group = productGroupRepo.findOne(product.getGroupid());
 			newproduct.setProductGroup(group);
-			Product saved = productRepo.save(newproduct);
-			
-			log.info(String.valueOf(saved.getId()));
+			productRepo.save(newproduct);
+			File f = new File("/text.txt");
+			BufferedWriter w = new BufferedWriter(new FileWriter(f));
+			w.write("text");
+			log.info(f.getAbsolutePath());
 		} catch(Exception e){
-			result.setSuccess(false);
-			result.setMessage(e.getMessage());
 			e.printStackTrace();
+			throw new Exception("Error while add new product: " + e.getMessage());
 		}
-		return result;
+ 
+	}
+
+	@Override
+	public void updateProduct(Product product) throws Exception {
+		 
 	}
 	
 	

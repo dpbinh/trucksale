@@ -1,11 +1,6 @@
 package com.trucksale.bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.trucksale.model.Product;
-import com.trucksale.model.ProductGroup;
-import com.trucksale.model.SpecificationProduct;
 
 public class ProductBean {
 
@@ -17,9 +12,7 @@ public class ProductBean {
 	
 	private long price;
 	
-	private ProductGroup group;
-	
-	private List<SpecificationGroupBean> specGroups = new ArrayList<SpecificationGroupBean>();
+	private ProductGroupBean group;
 	
 	public ProductBean() {
 		super();
@@ -38,32 +31,10 @@ public class ProductBean {
 		this.name = product.getName();
 		this.img = product.getImg();
 		this.price = product.getPrice();
+		this.group = new ProductGroupBean(product.getProductGroup());
+		
 	}
 	
-	public ProductBean(Product product,  Iterable<SpecificationProduct> specs){
-		this(product);
-		for(SpecificationProduct spec : specs){
-			SpecificationBean specb = new SpecificationBean(spec.getSpecification(), spec.getSpecificationValue());
-			SpecificationGroupBean existrdSpecG = getExistInSpecGroups(spec.getId());
-			if(existrdSpecG == null){
-				SpecificationGroupBean newSpecG = new SpecificationGroupBean(spec.getSpecification().getSpecificationGroup());
-				newSpecG.getSpecifications().add(specb);
-				specGroups.add(newSpecG);
-			} else {
-				existrdSpecG.getSpecifications().add(specb);
-			}
-		}
-	}
-	
-	private SpecificationGroupBean getExistInSpecGroups(long specGroupId){
-		for(SpecificationGroupBean specg : specGroups){
-			if(specg.getId() == specGroupId){
-				return specg;
-			}
-		}
-		return null;
-	}
-
 	public long getId() {
 		return id;
 	}
@@ -96,21 +67,12 @@ public class ProductBean {
 		this.price = price;
 	}
 
-	public List<SpecificationGroupBean> getSpecGroups() {
-		return specGroups;
-	}
 
-	public void setSpecGroups(List<SpecificationGroupBean> specGroups) {
-		this.specGroups = specGroups;
-	}
-
-	public ProductGroup getGroup() {
+	public ProductGroupBean getGroup() {
 		return group;
 	}
 
-	public void setGroup(ProductGroup group) {
+	public void setGroup(ProductGroupBean group) {
 		this.group = group;
 	}
-	
-	
 }

@@ -24,5 +24,10 @@ public class ActionResultSingle<T> extends ActionResult {
 		this.object = object;
 	}
 	
-	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void runWoker(ExecuteWorker worker) throws Exception {
+		 
+		object = (T) worker.doWork();
+	}
 }

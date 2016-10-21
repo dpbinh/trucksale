@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trucksale.Application;
 import com.trucksale.bean.ActionResult;
+import com.trucksale.bean.ActionResultT;
 import com.trucksale.bean.AddNewProductBean;
+import com.trucksale.bean.ExecuteWorker;
 import com.trucksale.bean.ProductBean;
+import com.trucksale.bean.ProductGroupBean;
 import com.trucksale.bean.UserBean;
 import com.trucksale.service.ProductService;
 
@@ -25,7 +28,17 @@ public class AdminProductApiController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ActionResult newProduct(@RequestBody AddNewProductBean product){
+		ActionResult result = new ActionResult();
+		result.execute(new ExecuteWorker() {
+			
+			@Override
+			public Object doWork() throws Exception {
+				productService.addNewProduct(product);
+				return null;
+			}
+		});
 		
-		return productService.addNewProduct(product);
+		return result; 	
+		
 	}
 }

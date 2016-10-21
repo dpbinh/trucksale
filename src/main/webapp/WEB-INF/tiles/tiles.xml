@@ -53,8 +53,8 @@
 		<put-attribute name="admin_body" value="/WEB-INF/tiles/admin/view/product/products.jsp" />
 	</definition>
 	
-	<definition name="admin_newproduct" extends="admin_template">
-		<put-attribute name="admin_title" value="Thêm sản phẩm" />
-		<put-attribute name="admin_body" value="/WEB-INF/tiles/admin/view/product/newproduct.jsp" />
+	<definition name="admin_product_detail" extends="admin_template">
+		<put-attribute name="admin_title" value="Chi tiết sản phẩm" />
+		<put-attribute name="admin_body" value="/WEB-INF/tiles/admin/view/product/product-detail.jsp" />
 	</definition>
 </tiles-definitions>

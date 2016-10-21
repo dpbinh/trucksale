@@ -1,7 +1,7 @@
 package com.trucksale.bean;
 
 
-public class ActionResult {
+public class ActionResult{
 	private boolean isSuccess = true;
 	
 	private String message = "";
@@ -32,5 +32,18 @@ public class ActionResult {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	
+	public void execute(ExecuteWorker worker){
+		try{
+			runWoker(worker);
+		} catch(Exception e){
+			this.setSuccess(false);
+			this.setMessage(e.getMessage());
+		}
+	}
+	
+	protected void runWoker(ExecuteWorker worker) throws Exception{
+		worker.doWork();
 	}
 }

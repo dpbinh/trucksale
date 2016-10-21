@@ -1,31 +1,26 @@
 package com.trucksale.service;
 
-import com.trucksale.bean.ActionResult;
-import com.trucksale.bean.ActionResultSingle;
-import com.trucksale.bean.ActionResultT;
+import java.util.List;
+
 import com.trucksale.bean.AddNewProductBean;
 import com.trucksale.bean.PricingBean;
 import com.trucksale.bean.ProductBean;
 import com.trucksale.bean.ProductGroupBean;
-import com.trucksale.bean.ProductResourceBean;
-import com.trucksale.bean.SpecificationGroupBean;
+import com.trucksale.model.Product;
 
 public interface ProductService {
 	
-	ActionResultT<ProductGroupBean> getAllProductGroup();
+	List<ProductGroupBean> getAllProductGroup() throws Exception;
 	
-	ActionResultT<ProductGroupBean> getAllProducts();
+	List<ProductGroupBean> getAllProducts() throws Exception;
 	
-	ActionResultT<ProductBean> getProductsByGroup(long groupId);
+	List<ProductBean> getProductsByGroup(long groupId) throws Exception;
 	
-	ActionResultSingle<ProductBean> getProductDetail(long productId);
+	Product getProductDetail(long productId) throws Exception;
+
+	List<PricingBean> getPricing() throws Exception;
+
+	void addNewProduct(AddNewProductBean product) throws Exception;
 	
-	ActionResultT<ProductResourceBean> getProductResource(long productId);
-	
-	ActionResultT<PricingBean> getPricing();
-	
-	ActionResultT<SpecificationGroupBean> getAllActiveSpecification();
-	
-	ActionResult addNewProduct(AddNewProductBean product);
-	
+	void updateProduct(Product product) throws Exception;
 }

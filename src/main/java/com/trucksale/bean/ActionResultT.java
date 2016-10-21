@@ -23,5 +23,9 @@ public class ActionResultT<T> extends ActionResult{
 		this.objects = objects;
 	}
 	
-	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void runWoker(ExecuteWorker worker) throws Exception { 
+		objects = (List<T>) worker.doWork();
+	}
 }
