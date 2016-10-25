@@ -83,12 +83,12 @@ public class AdminProductApiController{
 	
 	@RequestMapping(value = "/insideresource/{id}", method = RequestMethod.POST)
 	public ActionResultSingle<String> updateInsideImgResource( @PathVariable(value="id") final long id,  @RequestParam("selectedfile") MultipartFile selectedfile){
-		return uploadProductResource(id, selectedfile, ResourceType.OUTSIDE);
+		return uploadProductResource(id, selectedfile, ResourceType.INSIDE);
 	}
 	
 	@RequestMapping(value = "/outsideresource/{id}", method = RequestMethod.POST)
 	public ActionResultSingle<String> updateOutsideImgResource( @PathVariable(value="id") final long id,  @RequestParam("selectedfile") MultipartFile selectedfile){
-		return uploadProductResource(id, selectedfile, ResourceType.INSIDE);
+		return uploadProductResource(id, selectedfile, ResourceType.OUTSIDE);
 	}
 	
 	private ActionResultSingle<String> uploadProductResource(long id, MultipartFile selectedfile, ResourceType type){

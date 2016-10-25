@@ -320,12 +320,30 @@ function readURL(input) {
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="inside">
-						<button id="inside-add-img">Thêm</button>
-						<div id="inside-container"></div>
+						<p>
+							<button id="inside-add-img" class="btn btn-primary">Thêm</button>
+ 						</p>
+						<table>
+							<thead>
+								<th>Chức Năng</th>
+								<th>Ảnh</th>
+							</thead>
+							<tbody id="inside-container">
+							</tbody>
+						</table>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="outside">
-						<button id="outside-add-img">Thêm</button>
-						<div id="outside-container"></div>
+						<p>
+							<button id="outside-add-img" class="btn btn-primary">Thêm</button>
+						</p>
+						<table>
+							<thead>
+								<th>Chức Năng</th>
+								<th>Ảnh</th>
+							</thead>
+							<tbody id="outside-container">
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -411,21 +429,38 @@ function readURL(input) {
 		});
 		
 		$('#btn-upload-avatar').click(function(){
-			$('#input-select-file').val("");
-			$('#img-show-selected-img').attr('src', "");
 			var url = uploadaction = "/admin/api/product/avatar/" + id;
 			uploadImg(url, function(data){
 				$('#product-avatar').attr('src', data.object);
 			});
 		});
 		
-		function uploadImg(url, success){
+		$('#inside-add-img').click(function(){
+			var url = "/admin/api/product/insideresource/" + id;
+			uploadImg(url, function(data){
+				var tmp = $.validator.format("<td><button class='btn btn-danger'>Xóa</button></td><td><img src='{0}' width='200' /></td>");
+				$('#inside-container').append(tmp(data.object));
+			});
+		});
+		
+		$('#outside-add-img').click(function(){
+			var url = "/admin/api/product/outsideresource/" + id;
+			uploadImg(url, function(data){
+				var tmp = $.validator.format("<td><button class='btn btn-danger'>Xóa</button></td><td><img src='{0}' width='200' /></td>");
+				$('#outside-container').append(tmp(data.object));
+			});
+		});
+		
+		function uploadImg(url, completed){
+			
+			$('#input-select-file').val("");
+			$('#img-show-selected-img').attr('src', "");
 			$('#select-img-dialog').modal('show');
 			$('#save-change-img').click(function(){
 				var status = checkfile($("#selectedfile")[0]);
 				if(status == ""){
 					$.ajax({
-				        url: uploadaction,
+				        url: url,
 				        type: "POST",
 				        data: new FormData($("#select-file-form")[0]),
 				        enctype: 'multipart/form-data',
@@ -433,7 +468,7 @@ function readURL(input) {
 				        contentType: false,
 				        cache: false,
 				        success: function (data) {
-				        	success(data);
+				        	completed(data);
 				        	$('#select-img-dialog').modal('hide');
 				        },
 				     });
@@ -458,13 +493,6 @@ function readURL(input) {
 		    
 		    return "";
 		}
-		
-		$('#inside').click(function(){
-			
-		});
-		
-		$('#outside').click(function(){
-			
-		});
+
 	 });
 </script>

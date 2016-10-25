@@ -210,7 +210,7 @@ public class ProducServiceImpl implements ProductService {
 					Files.createDirectories(path);
 				}
 				
-				String avatarPath= FileHelper.uploadFileToFolder(path.toString(), rpath, fileName, bytes);
+				String avatarPath= FileHelper.uploadFileToFolder(root, rpath, fileName, bytes);
 				
 				String oldImg = product.getImg();
 				product.setImg(avatarPath);
@@ -270,8 +270,7 @@ public class ProducServiceImpl implements ProductService {
 			Product product = productRepo.findOne(productId);
 			if(product != null) {
 				String subpath = getSubpath(product, resource.getType());
-				String rootProduct =  root + subpath;
-				result = FileHelper.uploadFileToFolder(rootProduct, subpath, resource.getPath(), bytes);
+				result = FileHelper.uploadFileToFolder(root, subpath, resource.getPath(), bytes);
 			}
 
 		} catch(Exception e){
