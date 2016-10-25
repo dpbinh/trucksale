@@ -1,11 +1,20 @@
 package com.trucksale.service;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.omg.CORBA.Any;
 import org.omg.CORBA.Object;
@@ -20,16 +29,27 @@ import com.trucksale.Application;
 import com.trucksale.bean.ActionResult;
 import com.trucksale.bean.AddNewProductBean;
 import com.trucksale.bean.BeanUtil;
+import com.trucksale.bean.ImgProductResource;
 import com.trucksale.bean.PricingBean;
 import com.trucksale.bean.ProductBean;
 import com.trucksale.bean.ProductGroupBean;
+import com.trucksale.bean.ResourceType;
 import com.trucksale.model.Product;
 import com.trucksale.model.ProductGroup;
 import com.trucksale.repository.ProductGroupRepository;
 import com.trucksale.repository.ProductRepository;
+import com.trucksale.util.FileHelper;
 
 @Service
+@Transactional
 public class ProducServiceImpl implements ProductService {
+	private static final String UPLOAD_PATH = File.separator + "static" + File.separator + "img" + File.separator + "products" + File.separator;
+	
+	private static final String INSIDE = File.separator + "inside";
+	
+	private static final String OUTSIDE = File.separator + "outside";
+	
+	private static final String[] TYPES = {".jpg", ".png"};
 	
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
 	
@@ -123,8 +143,8 @@ public class ProducServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void addNewProduct(AddNewProductBean product)  throws Exception{
-		ActionResult result = new ActionResult();
+	public void addNewProduct(String root, AddNewProductBean product)  throws Exception{
+
 		log.info(product.getName() + " " + product.getPrice() + " " + product.getGroupid());
 		try{
 			Product newproduct = new Product();
@@ -132,11 +152,39 @@ public class ProducServiceImpl implements ProductService {
 			newproduct.setPrice(product.getPrice());
 			ProductGroup group = productGroupRepo.findOne(product.getGroupid());
 			newproduct.setProductGroup(group);
-			productRepo.save(newproduct);
-			File f = new File("/text.txt");
-			BufferedWriter w = new BufferedWriter(new FileWriter(f));
-			w.write("text");
-			log.info(f.getAbsolutePath());
+			Product saved = productRepo.save(newproduct);
+			
+			try{
+				if(saved.getId() > 0 ){
+					String rpath =  UPLOAD_PATH + saved.getId();
+					
+					Path path = Paths.get(root + rpath);
+					if(Files.notExists(path)){
+						Files.createDirectory(path);
+					}
+
+					Path inside =  Paths.get(path.toString() + INSIDE);
+					if(Files.notExists(inside)){
+						Files.createDirectories(inside);
+					}
+					
+					Path outside =  Paths.get(path.toString() + OUTSIDE);
+					if(Files.notExists(outside)){
+						Files.createDirectories(outside);
+					}
+					
+					log.info("Inse Path " + inside.toString());
+					saved.setInsideImgDir(rpath + INSIDE);
+					saved.setOutsideImgDir(rpath + OUTSIDE);
+					productRepo.save(saved);
+				} else {
+					throw new Exception("Product has not created");
+				}
+				
+			} catch(IOException e){
+				throw new Exception("Can not create resource folder: " + e.getMessage());
+			}
+			
 		} catch(Exception e){
 			e.printStackTrace();
 			throw new Exception("Error while add new product: " + e.getMessage());
@@ -148,7 +196,123 @@ public class ProducServiceImpl implements ProductService {
 	public void updateProduct(Product product) throws Exception {
 		 
 	}
-	
-	
 
+	@Override
+	public String updateProductAvatar(String root, long productId, String fileName, byte[] bytes)  throws Exception{
+		
+		String link = "";
+		try{
+			Product product = productRepo.findOne(productId);
+			if(product != null){
+				String rpath = UPLOAD_PATH + product.getId();
+				Path path = Paths.get(root + rpath);
+				if(Files.notExists(path)){
+					Files.createDirectories(path);
+				}
+				
+				String avatarPath= FileHelper.uploadFileToFolder(path.toString(), rpath, fileName, bytes);
+				
+				String oldImg = product.getImg();
+				product.setImg(avatarPath);
+				link = avatarPath;
+				if(!oldImg.isEmpty()){
+					Path oldImgPath = Paths.get(root + oldImg);
+					if(Files.exists(oldImgPath)){
+						Files.delete(oldImgPath);
+					}
+				}
+				
+			} else {
+				throw new Exception("product not exist");
+			}
+			
+		}catch(Exception e){
+			throw new Exception("Can not update avatar " + e.getMessage());
+		} 
+		
+		return link;
+		
+	}
+
+	@Override
+	public List<ImgProductResource> getProductResources(String root, long productId) throws Exception {
+		List<ImgProductResource> resources = new ArrayList<>();
+		try{
+			Product product = productRepo.findOne(productId);
+			if(product != null) {
+				List<String> insideFiles = FileHelper.getAllFileInFolder(root + product.getInsideImgDir(), TYPES);
+				List<String> outsideFiles = FileHelper.getAllFileInFolder(root + product.getOutsideImgDir(), TYPES);
+				resources.addAll(createImgResource(root, insideFiles, ResourceType.INSIDE));
+				resources.addAll(createImgResource(root, outsideFiles, ResourceType.OUTSIDE));
+			}
+			
+		} catch(Exception e){
+			
+		}
+		return resources;
+	}
+	
+	private List<ImgProductResource> createImgResource(String root, List<String> files, ResourceType type){
+		List<ImgProductResource> result = new ArrayList<>();
+		files = FileHelper.removeRoot(root, files);
+		for(String s : files){
+			ImgProductResource rs = new ImgProductResource(type, s);
+			result.add(rs);
+		}
+		return result;
+	}
+
+	@Override
+	public String uploadProductResource(String root, long productId, ImgProductResource resource, byte[] bytes)
+			throws Exception {
+		String result = "";
+		try{
+			Product product = productRepo.findOne(productId);
+			if(product != null) {
+				String subpath = getSubpath(product, resource.getType());
+				String rootProduct =  root + subpath;
+				result = FileHelper.uploadFileToFolder(rootProduct, subpath, resource.getPath(), bytes);
+			}
+
+		} catch(Exception e){
+			throw new Exception("Image upload not success " + e.getMessage());
+		}
+		return result;
+	}
+	
+	private String getSubpath(Product product, ResourceType type){
+		return ResourceType.INSIDE.equals(type) ? product.getInsideImgDir() : product.getOutsideImgDir();
+	}
+	
+	@Override
+	public void removeProductResource(String root, long productId, ImgProductResource resource) throws Exception {
+		try{
+			Product product = productRepo.findOne(productId);
+			if(product != null) {
+				String fileName = resource.getPath().substring(resource.getPath().lastIndexOf(File.separator), resource.getPath().length());
+				String subpath = getSubpath(product, resource.getType());
+				Path rootPath = Paths.get( root + subpath + File.separator + fileName );
+				if(Files.exists(rootPath)){
+					Files.delete(rootPath);
+				}
+			}
+		} catch(Exception e){
+			throw new Exception("Error when delete resource " + e.getMessage());
+		}
+	}
+	
+	@Override
+	public void removeProduct(String root, long productId) throws Exception {
+		try {
+			Product product = productRepo.findOne(productId);
+			if (product != null) {
+				productRepo.delete(productId);
+				Path rootPath = Paths.get( root + UPLOAD_PATH + productId);
+				FileHelper.deepDelete(rootPath);				
+			}
+
+		} catch (Exception e) {
+			throw new Exception("Error when remove product " + e.getMessage());
+		}
+	}
 }

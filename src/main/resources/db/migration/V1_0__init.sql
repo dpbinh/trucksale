@@ -57,8 +57,8 @@ create table if not exists PRODUCT
     DAMPING varchar(256),
     BRAKE_LIGHT varchar(256),
     BURGALAR varchar(256),
-    INSIDE_IMG_DIR varchar(20),
-    OUTSIDE_IMG_DIR varchar(20)
+    INSIDE_IMG_DIR varchar(256),
+    OUTSIDE_IMG_DIR varchar(256)
 );
  
 alter table USERS

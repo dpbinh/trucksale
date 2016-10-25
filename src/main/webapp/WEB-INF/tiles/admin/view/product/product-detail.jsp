@@ -1,10 +1,32 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script>
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#img-show-selected-img').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12">
 			<h1>Chi Tiết Xe</h1>
 			<div class="form-horizontal">
+				
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<img alt="avatar" id="product-avatar" src="" height="150"></br></br>
+						<button id="btn-upload-avatar" class="btn btn-primary">Đổi Ảnh</button>
+						<span>Kích thước tối ưu 600 x 400 .jpg hoac .png và không quá 2MB</span>
+					</div>
+				</div>
+				<div class="divider"></div>
 				<div class="form-group">
 					<label for='product-name' class='col-sm-2 control-label'>Tên Xe</label>
 					<div class="col-sm-10">
@@ -18,23 +40,22 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<center>
+							<button type="submit" class="btn btn-primary">Lưu</button>
+						</center>
+					</div>
+				</div>
+				<div class="form-group">
 					<label for='product-manufacture' class='col-sm-2 control-label'>Hãng Sản Xuất</label>
 					<div class="col-sm-10">
-						<select class='form-control' id='product-manufacture'>
-						</select>
+						<div class="form-inline">
+							<input type="text" class='form-control' id='product-manufacture' disabled/>
+							<button class="btn" >Thay đổi</button>
+						</div>	
 					</div>
 				</div>
-				<div class="form-group">
-					<label for='product-manufacture' class='col-sm-2 control-label'>Ảnh</label>
-					<div class="col-sm-10">
-						<input type="file" class='form-control' id='product-manufacture'/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<center><button type="submit" class="btn btn-primary">Lưu</button></center>
-					</div>
-				</div>
+
 			</div>
 		</div>
 	</div>
@@ -85,11 +106,7 @@
 								 </div>
 								<div class="divider"></div>
 							</p>
-							<div class="form-group">
-							    <div class="col-sm-offset-2 col-sm-10">
-							      <center><button type="submit" class="btn btn-primary">Lưu</button></center>
-							    </div>
-							 </div>
+
 <!-- .................................................................TẢI TRỌNG .............................................................. -->
 							<p>
 								<h3>TẢI TRỌNG</h3>
@@ -119,11 +136,6 @@
 								 </div>
 								<div class="divider"></div>
 							</p>
-							<div class="form-group">
-							    <div class="col-sm-offset-2 col-sm-10">
-							      <center><button type="submit" class="btn btn-primary">Lưu</button></center>
-							    </div>
-							 </div>
 <!-- .................................................................ĐỘNG CƠ .............................................................. -->
 							<p>
 								<h3>ĐỘNG CƠ</h3>
@@ -165,11 +177,6 @@
 								 </div>
 								<div class="divider"></div>
 							</p>
-							<div class="form-group">
-							    <div class="col-sm-offset-2 col-sm-10">
-							      <center><button type="submit" class="btn btn-primary">Lưu</button></center>
-							    </div>
-							 </div>
 <!-- ................................................................. HỘP SỐ .............................................................. -->
 							<p>
 								<h3>HỘP SỐ</h3>
@@ -185,11 +192,6 @@
 										<input type='text' class='form-control' id='manual'>
 									</div>
 								 </div>
-								 <div class="form-group">
-								    <div class="col-sm-offset-2 col-sm-10">
-								      <center><button type="submit" class="btn btn-primary">Lưu</button></center>
-								    </div>
-								 </div>	
 								<div class="divider"></div>
 							</p>
 							
@@ -202,11 +204,6 @@
 										<input type='text' class='form-control' id='stearing_system'>
 									</div>
 								 </div>
-								 <div class="form-group">
-								    <div class="col-sm-offset-2 col-sm-10">
-								      <center><button type="submit" class="btn btn-primary">Lưu</button></center>
-								    </div>
-								 </div>	
 								<div class="divider"></div>
 							</p>
 							
@@ -219,11 +216,7 @@
 										<input type='text' class='form-control' id='brakes_system'>
 									</div>
 								 </div>
-								 <div class="form-group">
-								    <div class="col-sm-offset-2 col-sm-10">
-								      <center><button type="submit" class="btn btn-primary">Lưu</button></center>
-								    </div>
-								 </div>	
+
 								<div class="divider"></div>
 							</p>
 <!-- .................................................................HỆ THỐNG TREO.............................................................. -->
@@ -241,11 +234,6 @@
 										<input type='text' class='form-control' id='rear'>
 									</div>
 								 </div>
-								 <div class="form-group">
-								    <div class="col-sm-offset-2 col-sm-10">
-								      <center><button type="submit" class="btn btn-primary">Lưu</button></center>
-								    </div>
-								 </div>	
 								<div class="divider"></div>
 							</p>						
 <!-- .................................................................LỐP XE.............................................................. -->
@@ -257,11 +245,6 @@
 										<input type='text' class='form-control' id='front_rear'>
 									</div>
 								 </div>
-								 <div class="form-group">
-								    <div class="col-sm-offset-2 col-sm-10">
-								      <center><button type="submit" class="btn btn-primary">Lưu</button></center>
-								    </div>
-								 </div>	
 								<div class="divider"></div>
 							</p>
 
@@ -292,11 +275,6 @@
 										<input type='text' class='form-control' id='capacity_fuel_tank'>
 									</div>
 								 </div>
-								 <div class="form-group">
-								    <div class="col-sm-offset-2 col-sm-10">
-								      <center><button type="submit" class="btn btn-primary">Lưu</button></center>
-								    </div>
-								 </div>	
 								<div class="divider"></div>
 							</p>
 <!-- .................................................................LỐP XE.............................................................. -->
@@ -342,8 +320,12 @@
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="inside">
+						<button id="inside-add-img">Thêm</button>
+						<div id="inside-container"></div>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="outside">
+						<button id="outside-add-img">Thêm</button>
+						<div id="outside-container"></div>
 					</div>
 				</div>
 			</div>
@@ -351,15 +333,50 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="select-img-dialog" tabindex="-1" role="dialog" aria-labelledby="SelectImg">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Thêm Xe</h4>
+			</div>
+			<div class="modal-body">
+				<form id="select-file-form" class="form-horizontal">
+					<div class="form-group">
+						<label for='input-select-file' class='col-sm-2 control-label'>Ảnh</label>
+						<div class="col-sm-10">
+							<input type="file" id="selectedfile" name="selectedfile" class='form-control' accept="image/*"
+							 onchange="readURL(this);" id='input-select-file' />
+						</div>
+					</div>
+				</form>
+				<center>
+					<img id="img-show-selected-img" src="" height="100"/>
+				</center>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+				<button type="button" class="btn btn-primary" id="save-change-img">Lưu</button>
+			</div>
+		</div>
+	</div>
+</div>
 <div style="display:none"><c:out value="${id}"/></div>
 <script>
 	 $(function(){
-		 var id = <c:out value="${id}"/>;
- 
+
+		var id = <c:out value="${id}"/>;
+ 		 
+ 		
 		$.get("/api/product/"+id, function(result){
 			var product = result.object;
+			$('#product-avatar').attr('src', product.img);
 			$('#product-name').val(product.name);
-			$('#product-price').val(product.price);	
+			$('#product-price').val(product.price);
+			$('#product-manufacture').val(product.productGroup.name);
 			$('#overall_demension').val(product.overallDemension);
 			$('#inside_cargo_box_demension').val(product.insideCargoBoxDemension);
 			$('#front_rear_tread').val(product.frontRearTread);
@@ -391,6 +408,63 @@
 			$('#damping').val(product.damping);
 			$('#seat_belt').val(product.brakeLight);
 			$('#lock_door').val(product.burgalar); 
+		});
+		
+		$('#btn-upload-avatar').click(function(){
+			$('#input-select-file').val("");
+			$('#img-show-selected-img').attr('src', "");
+			var url = uploadaction = "/admin/api/product/avatar/" + id;
+			uploadImg(url, function(data){
+				$('#product-avatar').attr('src', data.object);
+			});
+		});
+		
+		function uploadImg(url, success){
+			$('#select-img-dialog').modal('show');
+			$('#save-change-img').click(function(){
+				var status = checkfile($("#selectedfile")[0]);
+				if(status == ""){
+					$.ajax({
+				        url: uploadaction,
+				        type: "POST",
+				        data: new FormData($("#select-file-form")[0]),
+				        enctype: 'multipart/form-data',
+				        processData: false,
+				        contentType: false,
+				        cache: false,
+				        success: function (data) {
+				        	success(data);
+				        	$('#select-img-dialog').modal('hide');
+				        },
+				     });
+				} else {
+					$('#select-img-dialog').modal('hide');
+					showAlert("Lỗi dữ liệu", status);
+				}
+			});
+		}
+		 
+		function checkfile( file) {
+			var name = file.value;
+		    var validExts = new Array(".jpg", ".png", ".JPG", ".PNG");
+		    var fileExt = name.substring(name.lastIndexOf('.'));
+		    if (validExts.indexOf(fileExt) < 0) {
+		      return "File ảnh này không được hỗ trợ";
+		    }
+		    
+		    if(file.files[0].size > 2097152){
+		    	return "File lớn hơn 2MB không thể upload";
+		    }
+		    
+		    return "";
+		}
+		
+		$('#inside').click(function(){
+			
+		});
+		
+		$('#outside').click(function(){
+			
 		});
 	 });
 </script>

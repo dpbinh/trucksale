@@ -20,7 +20,7 @@
 </head>
 
 <body>
-
+	<tiles:insertAttribute name="admin_help"/>
 	<div id="wrapper">
 
 		<tiles:insertAttribute name="admin_header" />
@@ -29,7 +29,7 @@
 			<tiles:insertAttribute name="admin_body" />
 		</div>
 	</div>
-
+	
 	
 </body>
 
