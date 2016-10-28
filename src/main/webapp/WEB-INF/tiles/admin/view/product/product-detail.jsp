@@ -12,6 +12,8 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+
 </script>
 <div class="container-fluid">
 	<div class="row">
@@ -23,7 +25,7 @@ function readURL(input) {
 					<div class="col-sm-offset-2 col-sm-10">
 						<img alt="avatar" id="product-avatar" src="" height="150"></br></br>
 						<button id="btn-upload-avatar" class="btn btn-primary">Đổi Ảnh</button>
-						<span>Kích thước tối ưu 600 x 400 .jpg hoac .png và không quá 2MB</span>
+						<span>Kích thước tối ưu 600 x 400 .jpg hoặc .png và không quá 2MB</span>
 					</div>
 				</div>
 				<div class="divider"></div>
@@ -36,13 +38,13 @@ function readURL(input) {
 				<div class="form-group">
 					<label for='product-price' class='col-sm-2 control-label'>Giá Xe</label>
 					<div class="col-sm-10">
-						<input type='text' class='form-control' id='product-price'>
+						<input type='text' onkeypress='return event.charCode >= 48 && event.charCode <= 57' class='form-control' id='product-price'>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 						<center>
-							<button type="submit" class="btn btn-primary">Lưu</button>
+							<button id = "btn-update-quick-info" class="btn btn-primary">Lưu</button>
 						</center>
 					</div>
 				</div>
@@ -51,7 +53,8 @@ function readURL(input) {
 					<div class="col-sm-10">
 						<div class="form-inline">
 							<input type="text" class='form-control' id='product-manufacture' disabled/>
-							<button class="btn" >Thay đổi</button>
+							<button class="btn" id="btn-update-manufacture-action" >Thay đổi</button>
+							<input type="hidden" id="product-manufacture-id"/>
 						</div>	
 					</div>
 				</div>
@@ -312,7 +315,7 @@ function readURL(input) {
 								 </div>
 								 <div class="form-group">
 								    <div class="col-sm-offset-2 col-sm-10">
-								      <center><button type="submit" class="btn btn-primary">Lưu</button></center>
+								      <center><button id="btn-update-product-detail" class="btn btn-primary">Lưu</button></center>
 								    </div>
 								 </div>	
 								<div class="divider"></div>
@@ -323,9 +326,9 @@ function readURL(input) {
 						<p>
 							<button id="inside-add-img" class="btn btn-primary">Thêm</button>
  						</p>
-						<table>
+						<table class="table">
 							<thead>
-								<th>Chức Năng</th>
+								<th width="150">Chức Năng</th>
 								<th>Ảnh</th>
 							</thead>
 							<tbody id="inside-container">
@@ -336,9 +339,9 @@ function readURL(input) {
 						<p>
 							<button id="outside-add-img" class="btn btn-primary">Thêm</button>
 						</p>
-						<table>
+						<table class="table">
 							<thead>
-								<th>Chức Năng</th>
+								<th width="150">Chức Năng</th>
 								<th>Ảnh</th>
 							</thead>
 							<tbody id="outside-container">
@@ -351,7 +354,7 @@ function readURL(input) {
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="select-img-dialog" tabindex="-1" role="dialog" aria-labelledby="SelectImg">
+<div class="modal fade" data-backdrop="static" id="select-img-dialog" tabindex="-1" role="dialog" aria-labelledby="SelectImg">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -359,7 +362,7 @@ function readURL(input) {
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" id="myModalLabel">Thêm Xe</h4>
+				<h4 class="modal-title" id="myModalLabel">Cập Nhật Hình Ảnh</h4>
 			</div>
 			<div class="modal-body">
 				<form id="select-file-form" class="form-horizontal">
@@ -382,19 +385,43 @@ function readURL(input) {
 		</div>
 	</div>
 </div>
-<div style="display:none"><c:out value="${id}"/></div>
+ <div class="modal fade" data-backdrop="static" id="update-manufacture-form" tabindex="-1" role="dialog" aria-labelledby="manufacture">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" >Cập Nhật Nhà Sản Xuất</h4>
+			</div>
+			<div class="modal-body">
+				<form  class="form-horizontal">
+					<div class="form-group">
+						<label for='manufacture-select' class='col-sm-2 control-label'>Tên Nhà Sản Xuất</label>
+						<div class="col-sm-10">
+							<select id="manufacture-select" class="form-control"></select>
+						</div>	
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+				<button type="button" class="btn btn-primary" id="btn-update-manufacture">Lưu</button>
+			</div>
+		</div>
+	</div>
+</div>
 <script>
-	 $(function(){
-
-		var id = <c:out value="${id}"/>;
- 		 
- 		
-		$.get("/api/product/"+id, function(result){
+	var id = <c:out value="${id}"/>;
+	$(function() {
+		$.get("/api/product/" + id, function(result) {
 			var product = result.object;
 			$('#product-avatar').attr('src', product.img);
 			$('#product-name').val(product.name);
 			$('#product-price').val(product.price);
 			$('#product-manufacture').val(product.productGroup.name);
+			$('#product-manufacture-id').val(product.productGroup.id);
 			$('#overall_demension').val(product.overallDemension);
 			$('#inside_cargo_box_demension').val(product.insideCargoBoxDemension);
 			$('#front_rear_tread').val(product.frontRearTread);
@@ -424,75 +451,223 @@ function readURL(input) {
 			$('#seat_belt').val(product.seatBelt);
 			$('#lock_door').val(product.lockDoor);
 			$('#damping').val(product.damping);
-			$('#seat_belt').val(product.brakeLight);
-			$('#lock_door').val(product.burgalar); 
+			$('#brake_light').val(product.brakeLight);
+			$('#burgalar').val(product.burgalar);
 		});
-		
-		$('#btn-upload-avatar').click(function(){
+
+		$.get("/api/product/resources/" + id, function(data) {
+			$('#inside-container').html("");
+			$('#outside-container').html("");
+			$.each(data.objects, function(key, value) {
+
+				if (value.type == "INSIDE") {
+					buildResource('#inside-container', value);
+				} else if (value.type == "OUTSIDE") {
+					buildResource('#outside-container', value);
+				}
+			});
+		});
+
+		$('#btn-upload-avatar').click(function() {
 			var url = uploadaction = "/admin/api/product/avatar/" + id;
-			uploadImg(url, function(data){
+			uploadImg(url, function(data) {
 				$('#product-avatar').attr('src', data.object);
 			});
 		});
 		
-		$('#inside-add-img').click(function(){
+		$('#btn-update-quick-info').click(function(){
+			confirm("Cẩn thận", "có chắc bạn muốn cấp nhật", function(){
+				var qinfo = {
+					name : $('#product-name').val(),
+					price : $('#product-price').val()
+				};
+					
+				$.ajax({
+					url: "/admin/api/product/quickinfo/" + id,
+					type : "PUT",
+					data : JSON.stringify(qinfo),
+					contentType : "application/json",
+					success: function(data){
+						if(data.success){
+							showSuccessAlert("Thành Công", "Cập nhật thành công");
+						} else {
+							showSuccessAlert("Lỗi", "Cập nhật không thành công : " + data.message);
+						}
+					}
+				});
+			});
+		});
+		
+		$('#btn-update-product-detail').click(function(){
+			confirm("Cẩn thận", "có chắc bạn muốn cấp nhật", function(){
+				var product = {
+					overallDemension: 			$('#overall_demension').val(),
+					insideCargoBoxDemension :	$('#inside_cargo_box_demension').val(),
+					frontRearTread:				$('#front_rear_tread').val(),
+					wheelBase:					$('#wheel_base').val(),
+					groundClearance: 			$('#ground_clearance').val(),
+					curbWeight:					$('#curb_weight').val(),
+					loadWeight:					$('#load_weight').val(),
+					grossWeight:				$('#gross_weight').val(),
+					numberOfSeats:				$('#number_of_seats').val(),
+					carEngine:					$('#car_engine').val(),
+					engineType:					$('#engine_type').val(),
+					displacement:				$('#displacement').val(),
+					diameterPistonStroke:		$('#diameter_x_piston_stroke').val(),
+					maxPowerRotationSpeed:		$('#max_power_rotation_speed').val(),
+					maxTorqueRotationSpeed:		$('#max_torque_rotation_speed').val(),
+					clutch:						$('#clutch').val(),
+					manual:						$('#manual').val(),
+					stearingSystem:				$('#stearing_system').val(),
+					brakesSystem:				$('#brakes_system').val(),
+					front:						$('#front').val(),
+					rear:						$('#rear').val(),
+					frontRear:					$('#front_rear').val(),
+					hillClimbingAbility:		$('#hill_climbing_ability').val(),
+					minimumTurningRadius:		$('#minimum_turning_radius').val(),
+					maximumSpeed:				$('#maximum_speed').val(),
+					capacityFuelTank:			$('#capacity_fuel_tank').val(),
+					seatBelt:					$('#seat_belt').val(),
+					lockDoor:					$('#lock_door').val(),
+					damping:					$('#damping').val(),
+					brakeLight:					$('#brake_light').val(),
+					burgalar:					$('#burgalar').val()	
+				};
+				$.ajax({
+					url: "/admin/api/product/detail/" + id,
+					type : "PUT",
+					data : JSON.stringify(product),
+					contentType : "application/json",
+					success: function(data){
+						if(data.success){
+							showSuccessAlert("Thành Công", "Cập nhật thành công");
+						} else {
+							showSuccessAlert("Lỗi", "Cập nhật không thành công : " + data.message);
+						}
+					}
+				});
+				
+			});
+				
+		})
+		
+		$('#btn-update-manufacture-action').click(function(){
+			$('#manufacture-select').html("");
+			$.get("/api/product/productgroups", function(data){
+				var tmp = $.validator.format("<option value='{0}' {2}>{1}</option>");
+				var selectedId = $('#product-manufacture-id').val();
+				$.each(data.objects, function(key, value){
+					var selected = value.id == selectedId ? "selected":"";
+					$('#manufacture-select').append(tmp(value.id, value.name, selected));
+				});
+			});
+			var updateManufacture = function(){
+				$('#btn-update-manufacture').unbind("click", updateManufacture );
+				$('#update-manufacture-form').modal('hide');
+				confirm("Cẩn thận", "Có chắc bạn muốn cập nhật nhà sản xuất", function(){
+					$.ajax({
+						url: "/admin/api/product/group/" + id + "/" + $('#manufacture-select').val(),
+						type: "PUT",
+						success: function(data){
+							if(data.success){
+								$('#product-manufacture').val($('#manufacture-select option:selected').text());
+								$('#product-manufacture-id').val($('#manufacture-select').val());
+								showSuccessAlert("Thành Công", "Cập nhật thành công");
+							} else {
+								showSuccessAlert("Lỗi", "Cập nhật không thành công : " + data.message);
+							}
+						}
+					});
+				});
+			}
+			$('#update-manufacture-form').modal('show');
+			$('#btn-update-manufacture').bind("click", updateManufacture );
+		});
+		
+
+		$('#inside-add-img').click(function() {
 			var url = "/admin/api/product/insideresource/" + id;
-			uploadImg(url, function(data){
-				var tmp = $.validator.format("<td><button class='btn btn-danger'>Xóa</button></td><td><img src='{0}' width='200' /></td>");
-				$('#inside-container').append(tmp(data.object));
+			uploadImg(url, function(data) {
+				buildResource('#inside-container', data.object);
 			});
 		});
 		
-		$('#outside-add-img').click(function(){
+		$('#outside-add-img').click(function() {
 			var url = "/admin/api/product/outsideresource/" + id;
-			uploadImg(url, function(data){
-				var tmp = $.validator.format("<td><button class='btn btn-danger'>Xóa</button></td><td><img src='{0}' width='200' /></td>");
-				$('#outside-container').append(tmp(data.object));
+			uploadImg(url, function(data) {
+				buildResource('#outside-container', data.object);
 			});
 		});
+ 
+		function buildResource(el, value) {
+			var tmp = $.validator
+					.format("<tr class='{0}'><td><button id='{0}' class='btn btn-danger'>Xóa</button></td><td><img src='{1}' width='200' /></td></tr>");
+			$(el).append(tmp(value.id, value.path));
+			 
+			$('#'+value.id).click(function(){
+				removeResource(value.name , value.type, function(){
+					$('.'+value.id).remove();
+				});
+			});
+		}
 		
-		function uploadImg(url, completed){
-			
-			$('#input-select-file').val("");
+		function removeResource(name, type, completed) {
+	 		confirm("Cẩn Thận", "Có chắc bạn muốn xóa ảnh này", function(){
+	 			$.ajax({
+					url:"/admin/api/product/resource/" + id +"/" + name+"/" + type,
+					type: "DELETE",
+					success: function(data){
+						completed();
+					}
+				});
+	 		});
+		}
+		
+		function uploadImg(url, completed) {
+
+			$('#selectedfile').val("");
 			$('#img-show-selected-img').attr('src', "");
 			$('#select-img-dialog').modal('show');
-			$('#save-change-img').click(function(){
+			var uploadFunction = function() {
 				var status = checkfile($("#selectedfile")[0]);
-				if(status == ""){
+				if (status == "") {
 					$.ajax({
-				        url: url,
-				        type: "POST",
-				        data: new FormData($("#select-file-form")[0]),
-				        enctype: 'multipart/form-data',
-				        processData: false,
-				        contentType: false,
-				        cache: false,
-				        success: function (data) {
-				        	completed(data);
-				        	$('#select-img-dialog').modal('hide');
-				        },
-				     });
+						url : url,
+						type : "POST",
+						data : new FormData($("#select-file-form")[0]),
+						enctype : 'multipart/form-data',
+						processData : false,
+						contentType : false,
+						cache : false,
+						success : function(data) {
+							completed(data);
+							$('#select-img-dialog').modal('hide');
+							$('#save-change-img').unbind("click", uploadFunction);
+						},
+					});
 				} else {
 					$('#select-img-dialog').modal('hide');
 					showAlert("Lỗi dữ liệu", status);
 				}
-			});
-		}
-		 
-		function checkfile( file) {
-			var name = file.value;
-		    var validExts = new Array(".jpg", ".png", ".JPG", ".PNG");
-		    var fileExt = name.substring(name.lastIndexOf('.'));
-		    if (validExts.indexOf(fileExt) < 0) {
-		      return "File ảnh này không được hỗ trợ";
-		    }
-		    
-		    if(file.files[0].size > 2097152){
-		    	return "File lớn hơn 2MB không thể upload";
-		    }
-		    
-		    return "";
+			}
+			$('#save-change-img').bind("click", uploadFunction);
 		}
 
-	 });
+		function checkfile(file) {
+			var name = file.value;
+			var validExts = new Array(".jpg", ".png", ".JPG", ".PNG");
+			var fileExt = name.substring(name.lastIndexOf('.'));
+			if (validExts.indexOf(fileExt) < 0) {
+				return "File ảnh này không được hỗ trợ";
+			}
+
+			if (file.files[0].size > 2097152) {
+				return "File lớn hơn 2MB không thể upload";
+			}
+
+			return "";
+		}
+	 
+	});
+
 </script>

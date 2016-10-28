@@ -1,32 +1,20 @@
 package com.trucksale.service;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.omg.CORBA.Any;
-import org.omg.CORBA.Object;
-import org.omg.CORBA.TypeCode;
-import org.omg.CORBA.portable.InputStream;
-import org.omg.CORBA_2_3.portable.OutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.trucksale.Application;
-import com.trucksale.bean.ActionResult;
 import com.trucksale.bean.AddNewProductBean;
 import com.trucksale.bean.BeanUtil;
 import com.trucksale.bean.ImgProductResource;
@@ -44,6 +32,8 @@ import com.trucksale.util.FileHelper;
 @Transactional
 public class ProducServiceImpl implements ProductService {
 	private static final String UPLOAD_PATH = File.separator + "static" + File.separator + "img" + File.separator + "products" + File.separator;
+	
+	private static final String DEFAULT_PRODUCT_AVATAR = UPLOAD_PATH + File.separator + "truckdefault.jpg";
 	
 	private static final String INSIDE = File.separator + "inside";
 	
@@ -152,6 +142,7 @@ public class ProducServiceImpl implements ProductService {
 			newproduct.setPrice(product.getPrice());
 			ProductGroup group = productGroupRepo.findOne(product.getGroupid());
 			newproduct.setProductGroup(group);
+			newproduct.setImg(DEFAULT_PRODUCT_AVATAR);
 			Product saved = productRepo.save(newproduct);
 			
 			try{
@@ -194,9 +185,20 @@ public class ProducServiceImpl implements ProductService {
 
 	@Override
 	public void updateProduct(Product product) throws Exception {
-		 
+		try{
+			Product savedproduct = productRepo.findOne(product.getId());
+			if (savedproduct != null) {
+				product.cloneSpecificationTo(savedproduct);
+				productRepo.save(savedproduct);
+			} else {
+				throw new Exception("Product not exist");
+			}
+			
+		}catch(Exception e){
+			throw new Exception("Error while update product: " + e.getMessage());
+		}
 	}
-
+		
 	@Override
 	public String updateProductAvatar(String root, long productId, String fileName, byte[] bytes)  throws Exception{
 		
@@ -233,7 +235,7 @@ public class ProducServiceImpl implements ProductService {
 		return link;
 		
 	}
-
+	
 	@Override
 	public List<ImgProductResource> getProductResources(String root, long productId) throws Exception {
 		List<ImgProductResource> resources = new ArrayList<>();
@@ -257,20 +259,28 @@ public class ProducServiceImpl implements ProductService {
 		files = FileHelper.removeRoot(root, files);
 		for(String s : files){
 			ImgProductResource rs = new ImgProductResource(type, s);
+			String name = FileHelper.getFileName(s);
+			rs.setName(name);
+			rs.setId(name.substring(0, name.indexOf('.')));
 			result.add(rs);
 		}
 		return result;
 	}
 
 	@Override
-	public String uploadProductResource(String root, long productId, ImgProductResource resource, byte[] bytes)
+	public ImgProductResource uploadProductResource(String root, long productId, ImgProductResource resource, byte[] bytes)
 			throws Exception {
-		String result = "";
+		ImgProductResource result = new ImgProductResource();
 		try{
 			Product product = productRepo.findOne(productId);
 			if(product != null) {
 				String subpath = getSubpath(product, resource.getType());
-				result = FileHelper.uploadFileToFolder(root, subpath, resource.getPath(), bytes);
+				String path = FileHelper.uploadFileToFolder(root, subpath, resource.getPath(), bytes);
+				String name = FileHelper.getFileName(path);
+				result.setName(name);
+				result.setId(name.substring(0, name.indexOf('.')));
+				result.setPath(path);
+				result.setType(resource.getType());
 			}
 
 		} catch(Exception e){
@@ -284,13 +294,13 @@ public class ProducServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public void removeProductResource(String root, long productId, ImgProductResource resource) throws Exception {
+	public void removeProductResource(String root, long productId, String name, String type) throws Exception {
 		try{
+			ResourceType rstype =  ResourceType.valueOf(type);
 			Product product = productRepo.findOne(productId);
 			if(product != null) {
-				String fileName = resource.getPath().substring(resource.getPath().lastIndexOf(File.separator), resource.getPath().length());
-				String subpath = getSubpath(product, resource.getType());
-				Path rootPath = Paths.get( root + subpath + File.separator + fileName );
+				String subpath = getSubpath(product, rstype);
+				Path rootPath = Paths.get( root + subpath + File.separator + name );
 				if(Files.exists(rootPath)){
 					Files.delete(rootPath);
 				}
@@ -313,5 +323,59 @@ public class ProducServiceImpl implements ProductService {
 		} catch (Exception e) {
 			throw new Exception("Error when remove product " + e.getMessage());
 		}
+	}
+
+	@Override
+	public void updateQuickInfoProduct(long id, AddNewProductBean productbean) throws Exception {
+		try{
+			Product product = productRepo.findOne(id);
+			if (product != null) {
+				product.setName(productbean.getName());
+				product.setPrice(productbean.getPrice());
+				productRepo.save(product);
+			} else {
+				throw new Exception("Product not exist");
+			}
+			
+		}catch(Exception e){
+			throw new Exception("Error while update product: " + e.getMessage());
+		}
+		
+	}
+
+	@Override
+	public void updateGroupProduct(long productId, long groupId) throws Exception {
+		try{
+			Product product = productRepo.findOne(productId);
+			if (product != null) {
+				 ProductGroup newG = productGroupRepo.findOne(groupId);
+				 if(newG != null){
+					 product.setProductGroup(newG);
+					 productRepo.save(product);
+				 } else {
+					 throw new Exception("Manufacture does not exist");
+				 }
+			} else {
+				throw new Exception("Product not exist");
+			}
+			
+		}catch(Exception e){
+			throw new Exception("Error while update product: " + e.getMessage());
+		}
+		
+	}
+
+	@Override
+	public ProductGroupBean getProductGroup(long id) throws Exception {
+		ProductGroupBean group = new ProductGroupBean();
+		try{
+			ProductGroup g = productGroupRepo.findOne(id);
+			if(g != null){
+				group = new ProductGroupBean(g);
+			}
+		}catch(Exception e){
+			throw new Exception("Error get Group Product");
+		}
+		return group;
 	}
 }

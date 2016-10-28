@@ -66,14 +66,6 @@
                                                 <td>Inside cargo box dimension</td>
                                                 <td>3550 x 1865 x 560 mm </td>
                                             </tr>
-                                            <tr><td >Kích thước thùng</td>
-                                                <td>Cargo box dimension</td>
-                                                <td>
-                                                   4.890 x 2.050 x  1850 mm (mui bạt)<br>
-                                                   4.880 x 2.060 x 490 mm(thùng lửng)<br>
-                                                   5.050 x 2.060 x 1890 mm (thùng kín) 
-                                                </td>
-                                            </tr>
                                             <tr>
                                                 <td>Vệt bánh trước/Sau</td>
                                                 <td>Front/Rear tread</td>
@@ -106,11 +98,6 @@
                                                 <td>Tải trọng</td>
                                                 <td>Load weight</td>
                                                 <td>4450kg</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tải trọng chi tiết</td>
-                                                <td>Load weight detail</td>
-                                                <td>8.150 / 7.940 /7.755 kg ( Thùng lửng / bạt / kín )</td>
                                             </tr>
                                             <tr>
                                                 <td>Trọng lượng toàn bộ</td>
@@ -205,8 +192,94 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    
-                                    
+                                    <a class="collapse-title collapsed" role="button" data-toggle="collapse" href="#brake" aria-expanded="false" aria-controls="brake">
+                                      HỆ THỐNG TREO
+                                    </a>
+                                    <div class="collapse collapse-content table-responsive" id="brake">
+                                        <table class="table table-spec" >
+                                            <tr>
+                                                <td width="35%">Trước</td>
+                                                <td width="30%">Front</td>
+                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="35%">Sau</td>
+                                                <td width="30%">Rear</td>
+                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <a class="collapse-title collapsed" role="button" data-toggle="collapse" href="#brake" aria-expanded="false" aria-controls="brake">
+                                      LỐP XE
+                                    </a>
+                                    <div class="collapse collapse-content table-responsive" id="brake">
+                                        <table class="table table-spec" >
+                                            <tr>
+                                                <td width="35%">Trước/Sau</td>
+                                                <td width="30%">Front/Rear</td>
+                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <a class="collapse-title collapsed" role="button" data-toggle="collapse" href="#brake" aria-expanded="false" aria-controls="brake">
+                                      ĐẶC TÍNH
+                                    </a>
+                                    <div class="collapse collapse-content table-responsive" id="brake">
+                                        <table class="table table-spec" >
+                                            <tr>
+                                                <td width="35%">Khả năng leo dốc</td>
+                                                <td width="30%">Hill-climbing ability</td>
+                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="35%">Bán kính quay vòng nhỏ nhất</td>
+                                                <td width="30%">Minimum turning radius</td>
+                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="35%">Tốc độ tối đa</td>
+                                                <td width="30%">Maximum speed</td>
+                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="35%">Dung tích thùng nhiên liệu</td>
+                                                <td width="30%">Capacity fuel tank</td>
+                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <a class="collapse-title collapsed" role="button" data-toggle="collapse" href="#brake" aria-expanded="false" aria-controls="brake">
+                                      AN TOÀN
+                                    </a>
+                                    <div class="collapse collapse-content table-responsive" id="brake">
+                                        <table class="table table-spec" >
+                                            <tr>
+                                                <td width="35%">Dâ Đai An Toàn</td>
+                                                <td width="30%">seatbelt</td>
+                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="35%">Khóa Cửa An Toàn</td>
+                                                <td width="30%">lock door</td>
+                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="35%">Thanh Giảm Chấn</td>
+                                                <td width="30%">Damping</td>
+                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="35%">Đèn Báo Phanh</td>
+                                                <td width="30%">Brake lights</td>
+                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="35%">Chống Trộm</td>
+                                                <td width="30%">Burglar</td>
+                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="inside">
                                   <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD250.jpg">

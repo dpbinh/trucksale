@@ -20,6 +20,10 @@ public class ProductGroupBean {
 		this.img = productGroup.getImg();
 	}
 
+	public ProductGroupBean() {
+		 
+	}
+
 	public long getId() {
 		return id;
 	}

@@ -9,6 +9,15 @@
 	</div>
 </div>
 
+<div class="modal fade" id="alert-form-show-success" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="alert alert-success">
+			<h4 id="success-alert-title"></h4>
+			<p id="success-alert-message"></p>
+		</div>
+	</div>
+</div>
 <div class="modal fade" id="confirm-dialog" tabindex="-1" role="dialog" aria-labelledby="confirm">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -38,12 +47,18 @@
 		$('#alert-form-show').modal('show');
 	}
 	
-	function confirm(title, message, success){
+	function showSuccessAlert(title, message){
+		$('#success-alert-title').html(title);
+		$('#success-alert-message').html(message);
+		$('#alert-form-show-success').modal('show');
+	}
+	
+	function confirm(title, message, completed){
 		$('#confirm-title').html(title);
 		$('#confirm-message').html(message);
 	 	$('#confirm-dialog').modal('show');
 	 	$('#confirm-yes').click(function(){
-	 		success();
+	 		completed();
 	 		$('#confirm-dialog').modal('hide');
 	 	})
 	}

@@ -58,4 +58,13 @@
 		<put-attribute name="admin_title" value="Chi tiết sản phẩm" />
 		<put-attribute name="admin_body" value="/WEB-INF/tiles/admin/view/product/product-detail.jsp" />
 	</definition>
+	
+	<definition name="admin_change-password" extends="admin_template">
+		<put-attribute name="admin_title" value="Đổi mật khẩu" />
+		<put-attribute name="admin_body" value="/WEB-INF/tiles/admin/view/changepassword/change-password.jsp" />
+	</definition>
+	
+	<definition name="admin_login" template="/WEB-INF/tiles/admin/view/login/login.jsp">
+		<put-attribute name="admin_help" value="/WEB-INF/tiles/admin/layout/pages/help.jsp"/>
+	</definition>
 </tiles-definitions>

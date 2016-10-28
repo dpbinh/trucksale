@@ -37,7 +37,7 @@
 	 var grouptmpstr = "<li class='col-sm-3 img' ><a href='/product/{0}'><img class='img-responsive' src='{1}' /><h5 class='mtitle'>{2}</h5></a></li>"
 	 var grouptmp = $.validator.format(grouptmpstr);
 	 $(function(){
-		$.get('/api/productgroups', function(data){
+		$.get('/api/product/productgroups', function(data){
 			$('#header-product-menu').html("");
 			$.each(data.objects, function(key,val){
 				$('#header-product-menu').append(grouptmp(val.id, val.img, val.name));

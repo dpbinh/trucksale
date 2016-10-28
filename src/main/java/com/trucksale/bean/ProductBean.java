@@ -6,9 +6,9 @@ public class ProductBean {
 
 	private long id;
 	
-	private String name;
+	private String name = "";
 	
-	private String img;
+	private String img = "";
 	
 	private long price;
 	

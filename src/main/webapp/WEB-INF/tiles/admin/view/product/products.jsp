@@ -13,6 +13,7 @@
 			 		<th width="30%">Hãng Sản Xuất</th>
 			 		<th>Tên Xe</th>
 			 		<th>Giá Xe</th>
+			 		<th>Chức năng</th>
 			 	</thead>
 			 	<tbody id="products">
 			 		
@@ -21,7 +22,7 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="new-product-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" data-backdrop="static" id="new-product-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -50,7 +51,7 @@
 					<div class="form-group">
 						<label for="product-price" class="col-sm-2 control-label">Giá Xe</label>
 						<div class="col-sm-10">
-							<input class="form-control" type="text" id="product-price"/>
+							<input class="form-control"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' type="text" id="product-price"/>
 						</div>
 					</div>
 				</div>
@@ -64,23 +65,48 @@
 </div>
 <script>
 	$(function() {
-		$.get("/api/products", function(data) {
-			$('#products').html("");
-			var tmpstr = "<tr><td>{0}</td><td><a target=_blank href='/admin/product/{1}'>{2}</a></td><td>{3}</td></td>";
-			var tmp = $.validator.format(tmpstr);
-			$.each(data.objects, function(key, value) {
-				$.each(value.products, function(k, product) {
-					$('#products').append(
-							tmp(value.name, product.id, product.name, product.price));
+		loadProduct();
+		
+		function loadProduct(){
+			$.get("/api/product/products", function(data) {
+				$('#products').html("");
+				var tmpstr = "<tr><td>{0}</td><td><a target=_blank href='/admin/product/{1}'>{2}</a></td><td>{3}</td><td>"+
+				"<button id='product-{1}' class='btn btn-danger'>Xóa</button></td></tr>";
+				var tmp = $.validator.format(tmpstr);
+				$.each(data.objects, function(key, value) {
+					$.each(value.products, function(k, product) {
+						$('#products').append(tmp(value.name, product.id, product.name, product.price));
+						$('#product-'+product.id).click(function(){
+							removeProduct(product.id);
+						});
+					});
 				});
 			});
-		});
-
+		}
+		
+		function removeProduct(id){
+			confirm("Cẩn thân", "Xóa xe sẽ làm dữ liệu của xe hiện tại mất vĩnh viễn, và phải nhập lại, cẩn thận trước khi xóa",
+					function(){
+				$.ajax({
+					url: "/admin/api/product/" +id,
+					type: "DELETE",
+					success: function(data){
+						if(data.success){
+							loadProduct();
+							showSuccessAlert("Thành Công", "Đã xóa xe thành công");
+						} else {
+							showSuccessAlert("Lỗi", "Xóa xe không thành công : " + data.message);
+						}
+					}
+				});
+			});
+		}
+		
 		$('#new-product-model').on('shown.bs.modal', function() {
 			$('#product-manufactor').html("");
 			$('#product-name').html("");
 			$('#product-price').html("");
-			$.get("/api/productgroups", function(data){
+			$.get("/api/product/productgroups", function(data){
 				var tmp = $.validator.format("<option value='{0}'>{1}</option>");
 				$.each(data.objects, function(key, value){
 					$('#product-manufactor').append(tmp(value.id, value.name));
@@ -102,7 +128,13 @@
 				contentType : "application/json",
 				success: function(data){
 					$('#new-product-model').modal('hide');
-					alert(data.message);
+					if(data.success){
+						loadProduct();
+						showSuccessAlert("Thành Công","Đã thêm xe thành công");
+					} else {
+						showAlert("Lỗi", data.message);
+					}
+					
 				}
 			});
 

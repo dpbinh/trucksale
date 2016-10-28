@@ -4,113 +4,49 @@
     <div class="container">
         <div class="row text-center header animate-in" data-anim-type="fade-in-up">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h3><strong>HYUNDAI</strong></h3>
+                <h3><strong id="manufacture-name">HYUNDAI</strong></h3>
                 <hr />
             </div>
         </div>
         
-        <div class="row text-center animate-in" data-anim-type="fade-in-up">
-             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h4><strong>XE TẢI NHẸ</strong></h4><br>
-            </div>    
-            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 html">
-                <div class="work-wrapper">
-
-                    <a class="fancybox-media" title="Image Title Goes Here" href="/detail/1">
-                        <img src="/static/img/products/HDH100.jpg" class="img-responsive img-rounded" alt="" />
-                    </a>
-                     <h4>HYUNDAI HD100</h4>
-                    <h2><strong>345,000,000đ</strong></h2>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 html css">
-                <div class="work-wrapper">
-                    <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD800.jpg">
-                        <img src="/static/img/products/HD800.jpg" class="img-responsive img-rounded" alt="" />
-                    </a>
-                    <h4>HYUNDAI HD800</h4>
-                    <h2><strong>600,000,000đ</strong></h2>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 code script">
-                <div class="work-wrapper">
-                    <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD78.jpg">
-                        <img src="/static/img/products/HD78.jpg" class="img-responsive img-rounded" alt="" />
-                    </a>
-                    <h4>HYUNDAI HD78</h4>
-                    <h2><strong>588,000,000đ</strong></h2>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 html script">
-                <div class="work-wrapper">
-                    <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD72.JPG">
-                        <img src="/static/img/products/HD72.JPG" class="img-responsive img-rounded" alt="" />
-                    </a>
-                    <h4>HYUNDAI HD72</h4>
-                    <h2><strong>Liên Hệ</strong></h2>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 html code">
-                <div class="work-wrapper">
-                    <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD88.jpg">
-                        <img src="/static/img/products/HD88.jpg" class="img-responsive img-rounded" alt="" />
-                    </a>
-                    <h4>HYUNDAI HD88</h4>
-                    <h2><strong>525,000,000đ</strong></h2>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 script">
-                <div class="work-wrapper">
-                    <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD700-2.jpg">
-                        <img src="/static/img/products/HD700-2.jpg" class="img-responsive img-rounded" alt="" />
-                    </a>
-                    <h4>HYUNDAI HD700</h4>
-                    <h2><strong>595,000,000đ</strong></h2>
-                </div>
-            </div>
+        <div class="row text-center animate-in" data-anim-type="fade-in-up" id="trucks-container">
+              
         </div>
-        
-        <div class="row text-center animate-in" data-anim-type="fade-in-up">
-             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h4><strong>XE TẢI NẶNG</strong></h4><br>
-            </div>    
-            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 html">
-                <div class="work-wrapper">
-
-                    <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD99.jpg">
-                        <img src="/static/img/products/HD99.jpg" class="img-responsive img-rounded" alt="" />
-                    </a>
-                     <h4>HYUNDAI HD99</h4>
-                    <h2><strong>560,000,000đ</strong></h2>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 html css">
-                <div class="work-wrapper">
-                    <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD120.jpg">
-                        <img src="/static/img/products/HD120.jpg" class="img-responsive img-rounded" alt="" />
-                    </a>
-                    <h4>HYUNDAI HD120</h4>
-                    <h2><strong>Liên Hệ</strong></h2>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 code script">
-                <div class="work-wrapper">
-                    <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD250.jpg">
-                        <img src="/static/img/products/HD250.jpg" class="img-responsive img-rounded" alt="" />
-                    </a>
-                    <h4>HYUNDAI HD250</h4>
-                    <h2><strong>Liên Hệ</strong></h2>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 html script">
-                <div class="work-wrapper">
-                    <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD320.jpg">
-                        <img src="/static/img/products/HD320.jpg" class="img-responsive img-rounded" alt="" />
-                    </a>
-                    <h4>HYUNDAI HD320</h4>
-                    <h2><strong>Liên Hệ</strong></h2>
-                </div>
-            </div>
-        </div>
+     
     </div>
 </section>
+
+<script>
+	function moneyFormat(price, sign = ' VNĐ ') {
+	  const pieces = parseFloat(price).toFixed(2).split('')
+	  let ii = pieces.length - 3
+	  while ((ii-=3) > 0) {
+	    pieces.splice(ii, 0, ',')
+	  }
+	  return   pieces.join('') + sign
+	}
+
+	var id = <c:out value="${id}"/>;
+	$(function(){
+		$.get("/api/product/group/" + id , function(data){
+			$('#manufacture-name').html(data.object.name);
+		});
+		
+		$.get("/api/product/products/"+ id, function(data){
+			var tmps = "<div class='col-xs-6 col-sm-4 col-md-4 col-lg-4'>"+
+				        	"<div class='work-wrapper'>"+
+				        		"<a class='fancybox-media' title='Image Title Goes Here' href='{0}'>"+
+				            		"<img src='{0}' class='img-responsive img-rounded' alt='' />"+
+				        		"</a>"+
+				        		"<h4>{1}</h4>"+
+				        		"<h2><strong>{2}</strong></h2>"+
+				    		"</div>"+
+				    	"</div>";
+			var tmp = $.validator.format(tmps);
+			$('#trucks-container').html("");
+			$.each(data.objects, function(key, value){
+				$('#trucks-container').append(tmp(value.img, value.name, moneyFormat(value.price)));
+			});
+		});
+	});
+</script>

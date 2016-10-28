@@ -70,10 +70,10 @@ add constraint product_groupproduct foreign key ( PRODUCT_GROUP_ID) references P
 
 insert into ROLE(NAME) values ('ADMIN');
 
-insert into PRODUCT_GROUP(ID, NAME, IMG) values(1, 'Suzuki', '/img/logo/suzuki.png');
-insert into PRODUCT_GROUP(ID, NAME, IMG) values(2, 'Hino', '/img/logo/hino.png');
-insert into PRODUCT_GROUP(ID, NAME, IMG) values(3, 'Hyundai', '/img/logo/huyndai.png');
-insert into PRODUCT_GROUP(ID, NAME, IMG) values(4, 'Isuzu', '/img/logo/isuzu.png');
-insert into PRODUCT_GROUP(ID, NAME, IMG) values(5, 'Dongfeng', '/img/logo/dongfeng.png');
-insert into PRODUCT_GROUP(ID, NAME, IMG) values(6, 'Mitsubishi', '/img/logo/misubishi.png');
-insert into PRODUCT_GROUP(ID, NAME, IMG) values(7, 'Veam', '/img/logo/veam.png');
+insert into PRODUCT_GROUP(ID, NAME, IMG) values(1, 'Suzuki', '/static/img/logo/suzuki.png');
+insert into PRODUCT_GROUP(ID, NAME, IMG) values(2, 'Hino', '/static/img/logo/hino.png');
+insert into PRODUCT_GROUP(ID, NAME, IMG) values(3, 'Hyundai', '/static/img/logo/huyndai.png');
+insert into PRODUCT_GROUP(ID, NAME, IMG) values(4, 'Isuzu', '/static/img/logo/isuzu.png');
+insert into PRODUCT_GROUP(ID, NAME, IMG) values(5, 'Dongfeng', '/static/img/logo/dongfeng.png');
+insert into PRODUCT_GROUP(ID, NAME, IMG) values(6, 'Mitsubishi', '/static/img/logo/misubishi.png');
+insert into PRODUCT_GROUP(ID, NAME, IMG) values(7, 'Veam', '/static/img/logo/veam.png');

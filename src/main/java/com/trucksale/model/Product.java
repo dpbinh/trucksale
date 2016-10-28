@@ -12,77 +12,77 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	private String name;
+	private String name = "";
 	
-	private String img;
+	private String img = "";
 	
-	private long price;
+	private long price = 0;
 	
-	private String overallDemension;
+	private String overallDemension = "";
 	
-	private String insideCargoBoxDemension;
+	private String insideCargoBoxDemension = "";
 	
-	private String frontRearTread;
+	private String frontRearTread = "";
 	
-	private String wheelBase;
+	private String wheelBase = "";
 	
-	private String groundClearance;
+	private String groundClearance = "";
 	
-	private String curbWeight;
+	private String curbWeight = "";
 	
-	private String loadWeight;
+	private String loadWeight = "";
 	
-	private String grossWeight;
+	private String grossWeight = "";
 	
-	private String numberOfSeats;
+	private String numberOfSeats = "";
 	
-	private String carEngine;
+	private String carEngine = "";
 	
-	private String engineType;
+	private String engineType = "";
 	
-	private String displacement;
+	private String displacement = "";
 	
-	private String diameterPistonStroke;
+	private String diameterPistonStroke = "";
 	
-	private String maxPowerRotationSpeed;
+	private String maxPowerRotationSpeed = "";
 	
-	private String maxTorqueRotationSpeed;
+	private String maxTorqueRotationSpeed = "";
 	
-	private String clutch;
+	private String clutch = "";
 	
-	private String manual;
+	private String manual = "";
 	
-	private String stearingSystem;
+	private String stearingSystem = "";
 	
-	private String brakesSystem;
+	private String brakesSystem = "";
 	
-	private String front;
+	private String front = "";
 	
-	private String rear;
+	private String rear = "";
 	
-	private String frontRear;
+	private String frontRear = "";
 	
-	private String hillClimbingAbility;
+	private String hillClimbingAbility = "";
 	
-	private String minimumTurningRadius;
+	private String minimumTurningRadius = "";
 	
-	private String maximumSpeed;
+	private String maximumSpeed = "";
 	
-	private String capacityFuelTank;
+	private String capacityFuelTank = "";
 	
-	private String seatBelt;
+	private String seatBelt = "";
 	
-	private String lockDoor;
+	private String lockDoor = "";
 	
-	private String damping;
+	private String damping = "";
 	
-	private String brakeLight;
+	private String brakeLight = "";
 	
-	private String burgalar;
+	private String burgalar = "";
 	
-	private String insideImgDir;
+	private String insideImgDir = "";
 	
-	private String outsideImgDir;
+	private String outsideImgDir = "";
 	
 	@ManyToOne
 	private ProductGroup productGroup;
@@ -410,5 +410,37 @@ public class Product {
 		this.diameterPistonStroke = diameterPistonStroke;
 	}
 	
-	
+	public void cloneSpecificationTo(Product product){
+		product.setOverallDemension(this.getOverallDemension());
+		product.setInsideCargoBoxDemension(this.getInsideCargoBoxDemension());
+		product.setFrontRearTread(this.getFrontRearTread());
+		product.setWheelBase(this.getWheelBase());
+		product.setGroundClearance(this.getGroundClearance());
+		product.setCurbWeight(this.getCurbWeight());
+		product.setLoadWeight(this.getLoadWeight());
+		product.setGrossWeight(this.getGrossWeight());
+		product.setNumberOfSeats(this.getNumberOfSeats());
+		product.setCarEngine(this.getCarEngine());
+		product.setEngineType(this.getEngineType());
+		product.setDisplacement(this.getDisplacement());
+		product.setDiameterPistonStroke(this.getDiameterPistonStroke());
+		product.setMaxPowerRotationSpeed(this.getMaxPowerRotationSpeed());
+		product.setMaxTorqueRotationSpeed(this.getMaxTorqueRotationSpeed());
+		product.setClutch(this.getClutch());
+		product.setManual(this.getManual());
+		product.setStearingSystem(this.getStearingSystem());
+		product.setBrakesSystem(this.getBrakesSystem());
+		product.setFront(this.getFront());
+		product.setRear(this.getRear());
+		product.setFrontRear(this.getFrontRear());
+		product.setHillClimbingAbility(this.getHillClimbingAbility());
+		product.setMinimumTurningRadius(this.getMinimumTurningRadius());
+		product.setMaximumSpeed(this.getMaximumSpeed());
+		product.setCapacityFuelTank(this.getCapacityFuelTank());
+		product.setSeatBelt(this.getSeatBelt());
+		product.setLockDoor(this.getLockDoor());
+		product.setDamping(this.getDamping());
+		product.setBrakeLight(this.getBrakeLight());
+		product.setBurgalar(this.getBurgalar());
+	}
 }

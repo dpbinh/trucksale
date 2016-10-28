@@ -27,10 +27,14 @@ public class Application {
 	}
 
 	@Bean
-	public CommandLineRunner demo(UserService userrepo) {
-		return (args) -> {
-			 
-			log.info("save succesful");
+	public CommandLineRunner demo(UserService userService) {
+		return new CommandLineRunner() {
+			
+			@Override
+			public void run(String... arg0) throws Exception {
+				 userService.initUser();
+				 log.info("User has init");
+			}
 		};
 	}
 }

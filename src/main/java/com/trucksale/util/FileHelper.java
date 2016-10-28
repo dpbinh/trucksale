@@ -40,10 +40,11 @@ public class FileHelper {
 	}
 	
 	public static List<String> removeRoot(String root, List<String> files){
+		List<String> result = new ArrayList<>();
 		for(String s : files){
-			s.replace(root, "");
+			result.add(File.separator + s.replace(root, ""));
 		}
-		return files;
+		return result;
 	}
 	
 	public static String uploadFileToFolder(String root, String subpath, String fileName, byte[] bytes) throws Exception{
@@ -91,5 +92,9 @@ public class FileHelper {
 
 		});
 
+	}
+	
+	public static String getFileName(String value){
+		return value.substring(value.lastIndexOf(File.separator) + 1, value.length());
 	}
 }

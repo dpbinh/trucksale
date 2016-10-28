@@ -232,3 +232,44 @@ ul.alert-dropdown {
     overflow: hidden;
     background-color: #e5e5e5;
 }
+
+.login-panel {
+    width: 400px;
+    margin: 0px auto;
+    padding-top:50px;
+}
+
+.login-panel .login-logo {
+    color:#FFF;
+   
+}
+
+.login-panel .login-body {
+     background: rgba(255, 255, 255, 0.1);
+     color:#FFF;
+     padding: 20px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.login-body .login-title {
+    font-size: 19px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.login-body .form-control {
+    border: 0px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px 15px;
+    color: #CCC;
+    line-height: 20px;
+    height: auto;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+     box-shadow: none;
+}
