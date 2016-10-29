@@ -33,7 +33,7 @@ import com.trucksale.util.FileHelper;
 public class ProducServiceImpl implements ProductService {
 	private static final String UPLOAD_PATH = File.separator + "static" + File.separator + "img" + File.separator + "products" + File.separator;
 	
-	private static final String DEFAULT_PRODUCT_AVATAR = UPLOAD_PATH + File.separator + "truckdefault.jpg";
+	private static final String DEFAULT_PRODUCT_AVATAR = UPLOAD_PATH + "truckdefault.jpg";
 	
 	private static final String INSIDE = File.separator + "inside";
 	
@@ -217,7 +217,7 @@ public class ProducServiceImpl implements ProductService {
 				String oldImg = product.getImg();
 				product.setImg(avatarPath);
 				link = avatarPath;
-				if(!oldImg.isEmpty()){
+				if(!oldImg.isEmpty() && !oldImg.contains(DEFAULT_PRODUCT_AVATAR)){
 					Path oldImgPath = Paths.get(root + oldImg);
 					if(Files.exists(oldImgPath)){
 						Files.delete(oldImgPath);

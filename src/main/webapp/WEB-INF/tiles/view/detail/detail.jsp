@@ -10,31 +10,31 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
                             <div class="product-quick-show">
-                                <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HDH100.jpg">
-                                    <img src="/static/img/products/HDH100.jpg" class="img-responsive img-rounded" alt="" />
+                                <a class="fancybox-media" title="Image Title Goes Here">
+                                    <img id="product-avatar" class="img-responsive img-rounded" alt="Truck Avatar" />
                                 </a>
                             </div> 
                         </div>
                         <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
                             <div class="product-quick-show">
-                                <h4>HYUNDAI HD100</h4>
-                                <h2><strong>345,000,000đ</strong></h2>
+                                <h2><strong  id="product-name"></strong></h2>
+                                <h2><strong id="product-price"></strong></h2>
                                 <table class="table table-spec">
                                     <tr>
                                         <td><strong>Hãng Sản Xuất:</strong></td>
-                                        <td>Hyundai</td>
+                                        <td ><strong id="product-manufacture"></strong></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Động cơ:</strong></td>
-                                        <td>D4DB</td>
+                                        <td id="q-car_engine"></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Tải trọng:</strong></td>
-                                        <td>4450kg</td>
+                                        <td id="q-load_weight"></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Kích thước lọt lòng thùng</strong></td>
-                                        <td>3550 x 1865 x 560 mm </td>
+                                        <td id="q-inside_cargo_box_demension"></td>
                                     </tr>
                                 </table>
                             </div>                                              
@@ -59,27 +59,27 @@
                                             <tr>
                                                 <td width="35%">Kích thước tổng thể (D x R x C)</td>
                                                 <td width="30%">Overall dimension</td>
-                                                <td>5785 x 1990 x 2230mm</td>
+                                                <td id="overall_demension"></td>
                                             </tr>
                                             <tr>
                                                 <td>Kích thước lọt lòng thùng (D x R x C)</td>
                                                 <td>Inside cargo box dimension</td>
-                                                <td>3550 x 1865 x 560 mm </td>
+                                                <td id="inside_cargo_box_demension"></td>
                                             </tr>
                                             <tr>
                                                 <td>Vệt bánh trước/Sau</td>
                                                 <td>Front/Rear tread</td>
-                                                <td>1.665/1.495 mm</td>
+                                                <td id="front_rear_tread"></td>
                                             </tr>
                                             <tr>
                                                 <td>Chiều dài cơ sở</td>
                                                 <td>Wheelbase</td>
-                                                <td>3380mm</td>
+                                                <td id="wheel_base"></td>
                                             </tr>
                                             <tr>
                                                 <td>Khoảng sáng gầm xe</td>
                                                 <td>Ground clearance</td>
-                                                <td>235mm</td>
+                                                <td id="ground_clearance"></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -92,22 +92,22 @@
                                             <tr>
                                                 <td width="35%">Trọng lượng không tải</td>
                                                 <td width="30%">Curb weight</td>
-                                                <td>3605kg</td>
+                                                <td id="curb_weight"></td>
                                             </tr>
                                             <tr>
                                                 <td>Tải trọng</td>
                                                 <td>Load weight</td>
-                                                <td>4450kg</td>
+                                                <td id="load_weight"></td>
                                             </tr>
                                             <tr>
                                                 <td>Trọng lượng toàn bộ</td>
                                                 <td>Gross weight</td>
-                                                <td>8250kg</td>
+                                                <td id="gross_weight"></td>
                                             </tr>
                                             <tr>
                                                 <td>Số chỗ ngồi</td>
                                                 <td>Number of seats</td>
-                                                <td>8250kg</td>
+                                                <td id="number_of_seats"></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -118,34 +118,34 @@
                                     <div class="collapse collapse-content table-responsive" id="engine">
                                         <table class="table table-spec" >
                                             <tr>
-                                                <td width="35%">ĐỘNG CƠ</td>
-                                                <td width="30%">ENGINE</td>
-                                                <td>W04D-TR</td>
+                                                <td width="35%">Động Cơ</td>
+                                                <td width="30%">Engine</td>
+                                                <td id="car_engine"></td>
                                             </tr>
                                             <tr>
                                                 <td>Loại</td>
                                                 <td>Type</td>
-                                                <td>Diesel,  04 kỳ, 04 xilanh, làm mát bằng nước</td>
+                                                <td id="engine_type"></td>
                                             </tr>
                                             <tr>
                                                 <td>Dung tích xilanh</td>
                                                 <td>Displacement</td>
-                                                <td>4009 cc</td>
+                                                <td id="displacement"></td>
                                             </tr>
                                             <tr>
                                                 <td>Đường kính x Hành trình piston</td>
                                                 <td>Diameter x Piston stroke</td>
-                                                <td>104 x 115 mm</td>
+                                                <td id="diameter_x_piston_stroke"></td>
                                             </tr>
                                             <tr>
                                                 <td>Công suất cực đại/Tốc độ quay</td>
                                                 <td>Max power/Rotation speed</td>
-                                                <td>140 Ps/ 2700 vòng/phút</td>
+                                                <td id="max_power_rotation_speed"></td>
                                             </tr>
                                             <tr>
                                                 <td>Mômen xoắn cực đại/Tốc độ quay</td>
                                                 <td>Max torque/Rotation speed</td>
-                                                <td>38 kg/ 2600 vòng/phút</td>
+                                                <td id="max_torque_rotation_speed"></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -157,12 +157,12 @@
                                             <tr>
                                                 <td width="35%">Ly hợp</td>
                                                 <td width="30%">Clutch</td>
-                                                <td>1 đĩa, ma sát khô, dẫn động thủy lực, trợ lực khí nén</td>
+                                                <td id="clutch"></td>
                                             </tr>
                                             <tr>
                                                 <td>Số tay</td>
                                                 <td>Manual</td>
-                                                <td>Cơ khí, số sàn, 5 số tiến, 1 số lùi</td>
+                                                <td id="manual"></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -175,7 +175,7 @@
                                             <tr>
                                                 <td width="35%">HỆ THỐNG LÁI</td>
                                                 <td width="30%">STEERING SYSTEM</td>
-                                                <td>Trục vít ecu,  có trợ lực thủy lực</td>
+                                                <td id="stearing_system"></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -188,120 +188,105 @@
                                             <tr>
                                                 <td width="35%">HỆ THỐNG PHANH</td>
                                                 <td width="30%">BRAKES SYSTEM</td>
-                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                                <td id="brakes_system"></td>
                                             </tr>
                                         </table>
                                     </div>
-                                    <a class="collapse-title collapsed" role="button" data-toggle="collapse" href="#brake" aria-expanded="false" aria-controls="brake">
+                                    <a class="collapse-title collapsed" role="button" data-toggle="collapse" href="#hangsystem" aria-expanded="false" aria-controls="brake">
                                       HỆ THỐNG TREO
                                     </a>
-                                    <div class="collapse collapse-content table-responsive" id="brake">
+                                    <div class="collapse collapse-content table-responsive" id="hangsystem">
                                         <table class="table table-spec" >
                                             <tr>
                                                 <td width="35%">Trước</td>
                                                 <td width="30%">Front</td>
-                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                                <td id="front"></td>
                                             </tr>
                                             <tr>
                                                 <td width="35%">Sau</td>
                                                 <td width="30%">Rear</td>
-                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                                <td id="rear"></td>
                                             </tr>
                                         </table>
                                     </div>
-                                    <a class="collapse-title collapsed" role="button" data-toggle="collapse" href="#brake" aria-expanded="false" aria-controls="brake">
+                                    <a class="collapse-title collapsed" role="button" data-toggle="collapse" href="#tire" aria-expanded="false" aria-controls="brake">
                                       LỐP XE
                                     </a>
-                                    <div class="collapse collapse-content table-responsive" id="brake">
+                                    <div class="collapse collapse-content table-responsive" id="tire">
                                         <table class="table table-spec" >
                                             <tr>
                                                 <td width="35%">Trước/Sau</td>
                                                 <td width="30%">Front/Rear</td>
-                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                                <td id="front_rear"></td>
                                             </tr>
                                         </table>
                                     </div>
-                                    <a class="collapse-title collapsed" role="button" data-toggle="collapse" href="#brake" aria-expanded="false" aria-controls="brake">
+                                    <a class="collapse-title collapsed" role="button" data-toggle="collapse" href="#ability" aria-expanded="false" aria-controls="brake">
                                       ĐẶC TÍNH
                                     </a>
-                                    <div class="collapse collapse-content table-responsive" id="brake">
+                                    <div class="collapse collapse-content table-responsive" id="ability">
                                         <table class="table table-spec" >
                                             <tr>
                                                 <td width="35%">Khả năng leo dốc</td>
                                                 <td width="30%">Hill-climbing ability</td>
-                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                                <td id="hill_climbing_ability"></td>
                                             </tr>
                                             <tr>
                                                 <td width="35%">Bán kính quay vòng nhỏ nhất</td>
                                                 <td width="30%">Minimum turning radius</td>
-                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                                <td id="minimum_turning_radius"></td>
                                             </tr>
                                             <tr>
                                                 <td width="35%">Tốc độ tối đa</td>
                                                 <td width="30%">Maximum speed</td>
-                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                                <td id="maximum_speed"></td>
                                             </tr>
                                             <tr>
                                                 <td width="35%">Dung tích thùng nhiên liệu</td>
                                                 <td width="30%">Capacity fuel tank</td>
-                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                                <td id="capacity_fuel_tank"></td>
                                             </tr>
                                         </table>
                                     </div>
-                                    <a class="collapse-title collapsed" role="button" data-toggle="collapse" href="#brake" aria-expanded="false" aria-controls="brake">
+                                    <a class="collapse-title collapsed" role="button" data-toggle="collapse" href="#safe" aria-expanded="false" aria-controls="brake">
                                       AN TOÀN
                                     </a>
-                                    <div class="collapse collapse-content table-responsive" id="brake">
+                                    <div class="collapse collapse-content table-responsive" id="safe">
                                         <table class="table table-spec" >
                                             <tr>
                                                 <td width="35%">Dâ Đai An Toàn</td>
                                                 <td width="30%">seatbelt</td>
-                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                                <td id="seat_belt"></td>
                                             </tr>
                                             <tr>
                                                 <td width="35%">Khóa Cửa An Toàn</td>
                                                 <td width="30%">lock door</td>
-                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                                <td id="lock_door"></td>
                                             </tr>
                                             <tr>
                                                 <td width="35%">Thanh Giảm Chấn</td>
                                                 <td width="30%">Damping</td>
-                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                                <td id="damping"></td>
                                             </tr>
                                             <tr>
                                                 <td width="35%">Đèn Báo Phanh</td>
                                                 <td width="30%">Brake lights</td>
-                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                                <td id="brake_light"></td>
                                             </tr>
                                             <tr>
                                                 <td width="35%">Chống Trộm</td>
                                                 <td width="30%">Burglar</td>
-                                                <td>Phanh thủy lực tác động 2 dòng, trợ lực chân không, cơ cấu phanh loại tang trống</td>
+                                                <td id="burgalar"></td>
                                             </tr>
                                         </table>
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="inside">
-                                  <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD250.jpg">
-                                    <img src="/static/img/products/HD250.jpg" class="img-responsive" alt="" />
-                                  </a> <br>
-                                  <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD78.jpg">
-                                    <img src="/static/img/products/HD78.jpg" class="img-responsive" alt="" />
-                                  </a><br>
-                                  <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HDH100.jpg">
-                                    <img src="/static/img/products/HDH100.jpg" class="img-responsive" alt="" />
-                                  </a><br>
+                               		<div id="inside-container"></div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="outside">
-                                 <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD700-2.jpg">
-                                    <img src="/static/img/products/HD700-2.jpg" class="img-responsive" alt="" />
-                                  </a> <br>
-                                  <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD320.jpg">
-                                    <img src="/static/img/products/HD320.jpg" class="img-responsive" alt="" />
-                                  </a><br>
-                                  <a class="fancybox-media" title="Image Title Goes Here" href="/static/img/products/HD800.jpg">
-                                    <img src="/static/img/products/HD800.jpg" class="img-responsive" alt="" />
-                                  </a><br>
+                                	<div id="outside-container"></div>
+                                  
                                   </div>
                               </div>
                             </div>
@@ -312,3 +297,69 @@
         </div>
     </div>
 </section>
+
+<script>
+	var id = <c:out value="${id}"/>;
+	$(function() {
+		$.get("/api/product/" + id, function(result) {
+			var product = result.object;
+			$('#product-avatar').attr('src', product.img);
+			$('#product-name').html(product.name);
+			$('#product-price').html(moneyFormat(product.price));
+			$('#product-manufacture').html(product.productGroup.name);
+			$('#product-manufacture-id').html(product.productGroup.id);
+			$('#overall_demension').html(product.overallDemension);
+			$('#inside_cargo_box_demension').html(product.insideCargoBoxDemension);
+			$('#q-inside_cargo_box_demension').html(product.insideCargoBoxDemension);
+			$('#front_rear_tread').html(product.frontRearTread);
+			$('#wheel_base').html(product.wheelBase);
+			$('#ground_clearance').html(product.groundClearance);
+			$('#curb_weight').html(product.curbWeight);
+			$('#load_weight').html(product.loadWeight);
+			$('#q-load_weight').html(product.loadWeight);
+			$('#gross_weight').html(product.grossWeight);
+			$('#number_of_seats').html(product.numberOfSeats);
+			$('#car_engine').html(product.carEngine);
+			$('#q-car_engine').html(product.carEngine);
+			$('#engine_type').html(product.engineType);
+			$('#displacement').html(product.displacement);
+			$('#diameter_x_piston_stroke').html(product.diameterPistonStroke);
+			$('#max_power_rotation_speed').html(product.maxPowerRotationSpeed);
+			$('#max_torque_rotation_speed').html(product.maxTorqueRotationSpeed);
+			$('#clutch').html(product.clutch);
+			$('#manual').html(product.manual);
+			$('#stearing_system').html(product.stearingSystem);
+			$('#brakes_system').html(product.brakesSystem);
+			$('#front').html(product.front);
+			$('#rear').html(product.rear);
+			$('#front_rear').html(product.frontRear);
+			$('#hill_climbing_ability').html(product.hillClimbingAbility);
+			$('#minimum_turning_radius').html(product.minimumTurningRadius);
+			$('#maximum_speed').html(product.maximumSpeed);
+			$('#capacity_fuel_tank').html(product.capacityFuelTank);
+			$('#seat_belt').html(product.seatBelt);
+			$('#lock_door').html(product.lockDoor);
+			$('#damping').html(product.damping);
+			$('#brake_light').html(product.brakeLight);
+			$('#burgalar').html(product.burgalar);
+		});
+		
+		$.get("/api/product/resources/" + id, function(data) {
+			$('#inside-container').html("");
+			$('#outside-container').html("");
+			$.each(data.objects, function(key, value) {
+
+				if (value.type == "INSIDE") {
+					buildResource('#inside-container', value);
+				} else if (value.type == "OUTSIDE") {
+					buildResource('#outside-container', value);
+				}
+			});
+		});
+		
+		function buildResource(el, value) {
+			var tmp = $.validator.format("<p><img src='{0}' class='img-responsive' alt='' /></p>");
+			$(el).append(tmp(value.path));
+		}
+	});
+</script>

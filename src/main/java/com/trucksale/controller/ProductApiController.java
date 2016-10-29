@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.trucksale.bean.ActionResult;
 import com.trucksale.bean.ActionResultSingle;
 import com.trucksale.bean.ActionResultT;
 import com.trucksale.bean.ExecuteWorker;
 import com.trucksale.bean.ImgProductResource;
+import com.trucksale.bean.PricingBean;
 import com.trucksale.bean.ProductBean;
 import com.trucksale.bean.ProductGroupBean;
 import com.trucksale.model.Product;
@@ -105,6 +107,19 @@ public class ProductApiController {
 			}
 		});
 		
+		return result;
+	}
+	
+	@RequestMapping(value = "/pricing", method = RequestMethod.GET)
+	public ActionResultT<PricingBean> getPricing(){
+		ActionResultT<PricingBean> result = new ActionResultT<>();
+		result.execute(new ExecuteWorker() {
+			
+			@Override
+			public Object doWork() throws Exception {			
+				return productService.getPricing();
+			}
+		});
 		return result;
 	}
 }

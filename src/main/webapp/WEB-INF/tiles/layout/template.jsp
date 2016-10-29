@@ -23,6 +23,19 @@
 		<script src="/static/js/appear.min.js"></script>
 		<script src="/static/js/animations.min.js"></script>
 		<script src="/static/js/jquery.validate.min.js"></script>
+		<script>
+			function moneyFormat(price, sign = ' VNĐ ') {
+				if(price == 0){
+					return "Liên Hệ";
+				}
+			  const pieces = parseFloat(price).toFixed(2).split('')
+			  let ii = pieces.length - 3
+			  while ((ii-=3) > 0) {
+			    pieces.splice(ii, 0, ',')
+			  }
+			  return   pieces.join('') + sign
+			}
+		</script>
 	</head>
 	<body>
 		<div class="background-second-page"></div>

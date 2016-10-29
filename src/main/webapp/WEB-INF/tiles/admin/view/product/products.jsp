@@ -103,9 +103,9 @@
 		}
 		
 		$('#new-product-model').on('shown.bs.modal', function() {
-			$('#product-manufactor').html("");
-			$('#product-name').html("");
-			$('#product-price').html("");
+			$('#product-manufactor').val("");
+			$('#product-name').val("");
+			$('#product-price').val("");
 			$.get("/api/product/productgroups", function(data){
 				var tmp = $.validator.format("<option value='{0}'>{1}</option>");
 				$.each(data.objects, function(key, value){
