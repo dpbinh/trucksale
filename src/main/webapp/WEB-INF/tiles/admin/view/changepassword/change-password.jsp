@@ -1,4 +1,5 @@
  <%@ page contentType="text/html; charset=UTF-8"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="form-horizontal">
  
 	<div class="form-group">
@@ -35,13 +36,13 @@
 			if(sms == ""){
 				confirm("Cẩn thận", "cẩn thận khi thay đổi mật khẩu", function(){
 					$.ajax({
-						url:"/admin/api/user/changepassword",
+						url:"<c:url value="/admin/api/user/changepassword"/>",
 						type: "POST",
 						data: JSON.stringify(user),
 						contentType : "application/json",
 						success : function(data){
 							if(data.success){
-								location.href = "/admin";
+								location.href = "c:url value="/admin"/>";
 							} else {
 								showAlert("Lỗi", data.message);
 							}

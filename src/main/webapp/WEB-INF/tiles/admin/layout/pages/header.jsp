@@ -8,7 +8,7 @@
 			<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
 			<span class="icon-bar"></span> <span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="index.html">OTO Tải Biên Hòa ADMIN</a>
+		<a class="navbar-brand" href="<c:url value="/"/>">OTO Tải Biên Hòa ADMIN</a>
 	</div>
 	<!-- Top Menu Items -->
 	<ul class="nav navbar-right top-nav">
@@ -18,7 +18,7 @@
 				Hoạt Động <b class="caret"></b>
 			</a>
 			<ul class="dropdown-menu">
-				<li><a href="/admin/logout"><i class="fa fa-fw fa-power-off"></i> LogOut</a></li>
+				<li><a href="<c:url value="/admin/logout"/>"><i class="fa fa-fw fa-power-off"></i> LogOut</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -26,11 +26,11 @@
 	<div class="collapse navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav side-nav">
 			<li class='<c:if test="${page == 'products'}"> active </c:if>'>
-				<a href="/admin/products">Quản Lý Sản Phẩm</a>
+				<a href="<c:url value="/admin/products"/>">Quản Lý Sản Phẩm</a>
 			</li>
  
 			<li class='<c:if test="${page == 'password'}"> active </c:if>'>
-				<a href="/admin/changepass">Đổi Mật Khẩu</a>
+				<a href="<c:url value="/admin/changepass"/>">Đổi Mật Khẩu</a>
 			</li>
 			
 		</ul>

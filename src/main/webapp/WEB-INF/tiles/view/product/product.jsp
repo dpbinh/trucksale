@@ -20,15 +20,15 @@
 	
 	var id = <c:out value="${id}"/>;
 	$(function(){
-		$.get("/api/product/group/" + id , function(data){
+		$.get("<c:url value="/api/product/group/"/>" + id , function(data){
 			$('#manufacture-name').html(data.object.name);
 		});
 		
-		$.get("/api/product/products/"+ id, function(data){
+		$.get("<c:url value="/api/product/products/"/>"+ id, function(data){
 			var tmps = "<div class='col-xs-6 col-sm-4 col-md-4 col-lg-4'>"+
 				        	"<div class='work-wrapper'>"+
-				        		"<a class='fancybox-media' title='Image Title Goes Here' href='/detail/{3}'>"+
-				            		"<img src='{0}' class='img-responsive img-rounded' alt='' />"+
+				        		"<a class='fancybox-media' title='Image Title Goes Here' href='<c:url value="/detail/{3}"/>'>"+
+				            		"<img src='<c:url value="/{0}"/>' class='img-responsive img-rounded' alt='' />"+
 				        		"</a>"+
 				        		"<h4>{1}</h4>"+
 				        		"<h2><strong>{2}</strong></h2>"+

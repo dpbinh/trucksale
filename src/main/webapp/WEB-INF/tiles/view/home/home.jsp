@@ -53,7 +53,7 @@
 					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 						<div class="light-pricing ">
 							<div class="price">
-								<img src="static/img/portfolio/1.jpg"
+								<img src="<c:url value="/static/img/portfolio/1.jpg"/>"
 									class="img-responsive img-rounded" />
 							</div>
 							<div class="type">XE MỚI</div>
@@ -67,7 +67,7 @@
 					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 						<div class="light-pricing popular">
 							<div class="price">
-								<img src="static/img/portfolio/2.jpg"
+								<img src="<c:url value="/static/img/portfolio/2.jpg"/>"
 									class="img-responsive img-rounded" />
 							</div>
 							<div class="type">XE CŨ</div>
@@ -80,7 +80,7 @@
 					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 						<div class="light-pricing">
 							<div class="price">
-								<img src="static/img/portfolio/3.jpg"
+								<img src="<c:url value="/static/img/portfolio/3.jpg"/>"
 									class="img-responsive img-rounded" />
 							</div>
 							<div class="type">PHONG THỦY</div>

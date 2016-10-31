@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12">
@@ -68,9 +69,9 @@
 		loadProduct();
 		
 		function loadProduct(){
-			$.get("/api/product/products", function(data) {
+			$.get("<c:url value="/api/product/products"/>", function(data) {
 				$('#products').html("");
-				var tmpstr = "<tr><td>{0}</td><td><a target=_blank href='/admin/product/{1}'>{2}</a></td><td>{3}</td><td>"+
+				var tmpstr = "<tr><td>{0}</td><td><a target=_blank href='<c:url value="/admin/product/{1}"/>'>{2}</a></td><td>{3}</td><td>"+
 				"<button id='product-{1}' class='btn btn-danger'>Xóa</button></td></tr>";
 				var tmp = $.validator.format(tmpstr);
 				$.each(data.objects, function(key, value) {
@@ -88,7 +89,7 @@
 			confirm("Cẩn thân", "Xóa xe sẽ làm dữ liệu của xe hiện tại mất vĩnh viễn, và phải nhập lại, cẩn thận trước khi xóa",
 					function(){
 				$.ajax({
-					url: "/admin/api/product/" +id,
+					url: "<c:url value="/admin/api/product/"/>" +id,
 					type: "DELETE",
 					success: function(data){
 						if(data.success){
@@ -106,7 +107,7 @@
 			$('#product-manufactor').val("");
 			$('#product-name').val("");
 			$('#product-price').val("");
-			$.get("/api/product/productgroups", function(data){
+			$.get("<c:url value="/api/product/productgroups"/>", function(data){
 				var tmp = $.validator.format("<option value='{0}'>{1}</option>");
 				$.each(data.objects, function(key, value){
 					$('#product-manufactor').append(tmp(value.id, value.name));
@@ -122,7 +123,7 @@
 			} ;
 			 var t = JSON.stringify({"product": product});
 			$.ajax({
-				url : "/admin/api/product",
+				url : "<c:url value="/admin/api/product"/>",
 				type : "POST",
 				data : JSON.stringify( product),
 				contentType : "application/json",

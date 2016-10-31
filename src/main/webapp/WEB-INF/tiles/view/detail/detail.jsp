@@ -301,9 +301,9 @@
 <script>
 	var id = <c:out value="${id}"/>;
 	$(function() {
-		$.get("/api/product/" + id, function(result) {
+		$.get("<c:url value="/api/product/"/>" + id, function(result) {
 			var product = result.object;
-			$('#product-avatar').attr('src', product.img);
+			$('#product-avatar').attr('src', "<c:url value="/"/>" + product.img);
 			$('#product-name').html(product.name);
 			$('#product-price').html(moneyFormat(product.price));
 			$('#product-manufacture').html(product.productGroup.name);
@@ -344,7 +344,7 @@
 			$('#burgalar').html(product.burgalar);
 		});
 		
-		$.get("/api/product/resources/" + id, function(data) {
+		$.get("<c:url value="/api/product/resources/"/>" + id, function(data) {
 			$('#inside-container').html("");
 			$('#outside-container').html("");
 			$.each(data.objects, function(key, value) {
@@ -358,7 +358,7 @@
 		});
 		
 		function buildResource(el, value) {
-			var tmp = $.validator.format("<p><img src='{0}' class='img-responsive' alt='' /></p>");
+			var tmp = $.validator.format("<p><img src='<c:url value="/{0}"/>' class='img-responsive' alt='' /></p>");
 			$(el).append(tmp(value.path));
 		}
 	});

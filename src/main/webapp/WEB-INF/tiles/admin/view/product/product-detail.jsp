@@ -415,9 +415,9 @@ function readURL(input) {
 <script>
 	var id = <c:out value="${id}"/>;
 	$(function() {
-		$.get("/api/product/" + id, function(result) {
+		$.get("<c:url value="/api/product/"/>" + id, function(result) {
 			var product = result.object;
-			$('#product-avatar').attr('src', product.img);
+			$('#product-avatar').attr('src', "<c:url value="/"/>" +product.img);
 			$('#product-name').val(product.name);
 			$('#product-price').val(product.price);
 			$('#product-manufacture').val(product.productGroup.name);
@@ -455,7 +455,7 @@ function readURL(input) {
 			$('#burgalar').val(product.burgalar);
 		});
 
-		$.get("/api/product/resources/" + id, function(data) {
+		$.get("<c:url value="/api/product/resources/"/>" + id, function(data) {
 			$('#inside-container').html("");
 			$('#outside-container').html("");
 			$.each(data.objects, function(key, value) {
@@ -469,9 +469,9 @@ function readURL(input) {
 		});
 
 		$('#btn-upload-avatar').click(function() {
-			var url = uploadaction = "/admin/api/product/avatar/" + id;
+			var url = uploadaction = "<c:url value="/admin/api/product/avatar/"/>" + id;
 			uploadImg(url, function(data) {
-				$('#product-avatar').attr('src', data.object);
+				$('#product-avatar').attr('src', "<c:url value="/"/>" + data.object);
 			});
 		});
 		
@@ -483,7 +483,7 @@ function readURL(input) {
 				};
 					
 				$.ajax({
-					url: "/admin/api/product/quickinfo/" + id,
+					url: "<c:url value="/admin/api/product/quickinfo/"/>" + id,
 					type : "PUT",
 					data : JSON.stringify(qinfo),
 					contentType : "application/json",
@@ -534,7 +534,7 @@ function readURL(input) {
 					burgalar:					$('#burgalar').val()	
 				};
 				$.ajax({
-					url: "/admin/api/product/detail/" + id,
+					url: "<c:url value="/admin/api/product/detail/"/>" + id,
 					type : "PUT",
 					data : JSON.stringify(product),
 					contentType : "application/json",
@@ -553,7 +553,7 @@ function readURL(input) {
 		
 		$('#btn-update-manufacture-action').click(function(){
 			$('#manufacture-select').html("");
-			$.get("/api/product/productgroups", function(data){
+			$.get("<c:url value="/api/product/productgroups"/>", function(data){
 				var tmp = $.validator.format("<option value='{0}' {2}>{1}</option>");
 				var selectedId = $('#product-manufacture-id').val();
 				$.each(data.objects, function(key, value){
@@ -566,7 +566,7 @@ function readURL(input) {
 				$('#update-manufacture-form').modal('hide');
 				confirm("Cẩn thận", "Có chắc bạn muốn cập nhật nhà sản xuất", function(){
 					$.ajax({
-						url: "/admin/api/product/group/" + id + "/" + $('#manufacture-select').val(),
+						url: "<c:url value="/admin/api/product/group/"/>" + id + "/" + $('#manufacture-select').val(),
 						type: "PUT",
 						success: function(data){
 							if(data.success){
@@ -586,14 +586,14 @@ function readURL(input) {
 		
 
 		$('#inside-add-img').click(function() {
-			var url = "/admin/api/product/insideresource/" + id;
+			var url = "<c:url value="/admin/api/product/insideresource/"/>" + id;
 			uploadImg(url, function(data) {
 				buildResource('#inside-container', data.object);
 			});
 		});
 		
 		$('#outside-add-img').click(function() {
-			var url = "/admin/api/product/outsideresource/" + id;
+			var url = "<c:url value="/admin/api/product/outsideresource/"/>" + id;
 			uploadImg(url, function(data) {
 				buildResource('#outside-container', data.object);
 			});
@@ -601,7 +601,7 @@ function readURL(input) {
  
 		function buildResource(el, value) {
 			var tmp = $.validator
-					.format("<tr class='{0}'><td><button id='{0}' class='btn btn-danger'>Xóa</button></td><td><img src='{1}' width='200' /></td></tr>");
+					.format("<tr class='{0}'><td><button id='{0}' class='btn btn-danger'>Xóa</button></td><td><img src='<c:url value="/{1}"/>' width='200' /></td></tr>");
 			$(el).append(tmp(value.id, value.path));
 			 
 			$('#'+value.id).click(function(){
@@ -614,7 +614,7 @@ function readURL(input) {
 		function removeResource(name, type, completed) {
 	 		confirm("Cẩn Thận", "Có chắc bạn muốn xóa ảnh này", function(){
 	 			$.ajax({
-					url:"/admin/api/product/resource/" + id +"/" + name+"/" + type,
+					url:"<c:url value="/admin/api/product/resource/"/>" + id +"/" + name+"/" + type,
 					type: "DELETE",
 					success: function(data){
 						completed();

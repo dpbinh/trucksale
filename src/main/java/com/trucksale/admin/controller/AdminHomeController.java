@@ -31,7 +31,9 @@ public class AdminHomeController {
 	@RequestMapping(value="/product/{id}", method= RequestMethod.GET)
 	public ModelAndView getProductDetail(HttpServletRequest request, @PathVariable(value="id") String id){
 		if(!authService.checkRole(request, RoleType.ADMIN)){
-			return new ModelAndView(new RedirectView("/admin"));
+			RedirectView redirect =new RedirectView("/admin");
+			redirect.setContextRelative(true);
+			return new ModelAndView(redirect);
 		}
 		
 		Map<String, String> param =  new HashMap<String, String>();
@@ -43,7 +45,9 @@ public class AdminHomeController {
 	@RequestMapping(value="/products", method= RequestMethod.GET)
 	public ModelAndView getProducts(HttpServletRequest request){
 		if(!authService.checkRole(request, RoleType.ADMIN)){
-			return new ModelAndView(new RedirectView("/admin"));
+			RedirectView redirect =new RedirectView("/admin");
+			redirect.setContextRelative(true);
+			return new ModelAndView(redirect);
 		}
 		return new ModelAndView("admin_products", "page", "products");
 	}
@@ -51,7 +55,9 @@ public class AdminHomeController {
 	@RequestMapping(value="/logout", method= RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request){
 		if(!authService.checkRole(request, RoleType.ADMIN)){
-			return new ModelAndView(new RedirectView("/admin"));
+			RedirectView redirect =new RedirectView("/admin");
+			redirect.setContextRelative(true);
+			return new ModelAndView(redirect);
 		}
 		authService.logout(request);
 		return new ModelAndView(new RedirectView("/admin"));
@@ -60,7 +66,9 @@ public class AdminHomeController {
 	@RequestMapping(value="/changepass", method= RequestMethod.GET)
 	public ModelAndView changepass(HttpServletRequest request){
 		if(!authService.checkRole(request, RoleType.ADMIN)){
-			return new ModelAndView(new RedirectView("/admin"));
+			RedirectView redirect =new RedirectView("/admin");
+			redirect.setContextRelative(true);
+			return new ModelAndView(redirect);
 		}
 		return new ModelAndView("admin_change-password", "page", "password");
 	}

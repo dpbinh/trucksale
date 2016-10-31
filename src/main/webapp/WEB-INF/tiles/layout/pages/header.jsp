@@ -9,7 +9,7 @@
 	    <span class="icon-bar"></span>
 	    </button>
 	        <a class="navbar-brand" href="#">
-	            <img src="/static/img/logo/logo.png" class="img-responsive logo" />
+	            <img src="<c:url value="/static/img/logo/logo.png"/>" class="img-responsive logo" />
 	        </a>
 	    </div>
 	    <div class="navbar-collapse collapse" >
@@ -23,7 +23,7 @@
 					 	
 					</ul>
 				</li>
-	            <li class='<c:if test="${page == 'pricing'}"> active </c:if>'><a href="/pricing">BẢNG GIÁ</a></li>
+	            <li class='<c:if test="${page == 'pricing'}"> active </c:if>'><a href="<c:url value="/pricing"/>">BẢNG GIÁ</a></li>
 	            <li class='<c:if test="${page == 'loan'}"> active </c:if>'><a href="#">XE TRẢ GÓP</a></li>
 	            <li class='<c:if test="${page == 'repair'}"> active </c:if>'><a href="#">SỬA CHỮA</a></li>
 	            <li class='<c:if test="${page == 'insurrance'}"> active </c:if>'><a href="#">BẢO HIỂM</a></li>
@@ -34,10 +34,10 @@
 	</div>
 </div>
 <script>
-	 var grouptmpstr = "<li class='col-sm-3 img' ><a href='/product/{0}'><img class='img-responsive' src='{1}' /><h5 class='mtitle'>{2}</h5></a></li>"
+	 var grouptmpstr = "<li class='col-sm-3 img' ><a href='<c:url value="/product/{0}"/>'><img class='img-responsive' src='<c:url value="/{1}"/>' /><h5 class='mtitle'>{2}</h5></a></li>"
 	 var grouptmp = $.validator.format(grouptmpstr);
 	 $(function(){
-		$.get('/api/product/productgroups', function(data){
+		$.get('<c:url value="/api/product/productgroups"/>', function(data){
 			$('#header-product-menu').html("");
 			$.each(data.objects, function(key,val){
 				$('#header-product-menu').append(grouptmp(val.id, val.img, val.name));
